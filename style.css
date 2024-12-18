@@ -6,8 +6,8 @@
     --primary-text-color-light: #F9F5E8;
     --secondary-text-color-light: #FFF0D1;
 
-    --light-shadow: 0 5px 2rem rgba(0, 0, 0, 0.1);
-    --hevy-shadow: 0 5px 2.3rem rgba(0, 0, 0, 0.2);
+    --light-shadow: 0 0.3rem 2rem rgba(0, 0, 0, 0.1);
+    --hevy-shadow: 0 0.4rem 2.3rem rgba(0, 0, 0, 0.2);
 
     --button-border-radius: 0.3rem;
     --div-border-radius: 0.5rem;
@@ -37,12 +37,17 @@ body{
 }
 
 div.topBar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
     background: var(--navbar-color);
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding: 0.7rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: var(--light-shadow);
 }
 
 button.navButton{
@@ -70,3 +75,34 @@ button.navButton.highlighted:hover{
     filter: brightness(0.8);
 }
 
+h1.logoText{
+    font-family: "Bowlby", sans-serif;
+    font-size: 1.5rem;
+    color: var(--primary-text-color-light);
+    margin: 0;
+}
+
+div.logo{
+    display: flex;
+    align-items: center;
+}
+
+img.logoImage{
+    margin-right: .5rem;
+    width: 2rem;
+    height: 2rem;
+}
+
+div.section{
+    width: 100vw;
+    height: 100vh;
+    margin:0;
+}
+
+div.section.light{
+    background: var(--bg-color-light);
+}
+
+div.section.dark{
+    background-color: var(--bg-color-dark);
+}
