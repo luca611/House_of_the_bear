@@ -41,7 +41,7 @@ div.topBar{
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1;
+    z-index: 2;
     background: var(--navbar-color);
     padding: 0.7rem;
     display: flex;
@@ -97,6 +97,20 @@ div.section{
     width: 100vw;
     height: 100vh;
     margin:0;
+    position: relative;
+}
+
+div.innerDarker{
+    position: absolute;
+    top: calc(5vh + 4.4rem);
+    bottom: 5vh;
+    height: auto;
+
+    left: 5vw;
+    right: 5vw;
+    width: auto;
+    border-radius: var(--div-border-radius);
+    background: var(--bg-color-dark) url("resources/imgs/pattern.svg");
 }
 
 div.section.light{
@@ -106,3 +120,20 @@ div.section.light{
 div.section.dark{
     background-color: var(--bg-color-dark);
 }
+
+img.paw{
+    position: absolute;
+    top: 30vh;
+    left: 0;
+    height: 50vh;
+    aspect-ratio: 1/1;
+    z-index: 1;
+}
+
+img.paw.right{
+    left: auto;
+    right: 0;
+    transform: scaleX(-1);
+}
+
+
