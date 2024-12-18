@@ -1,0 +1,72 @@
+:root {
+    --navbar-color:#664343;
+    --bg-color-light: #5F3F3F;
+    --bg-color-dark: #3B3030;
+    --trasparent-grey: rgba(0, 0, 0, 0.5);
+    --primary-text-color-light: #F9F5E8;
+    --secondary-text-color-light: #FFF0D1;
+
+    --light-shadow: 0 5px 2rem rgba(0, 0, 0, 0.1);
+    --hevy-shadow: 0 5px 2.3rem rgba(0, 0, 0, 0.2);
+
+    --button-border-radius: 0.3rem;
+    --div-border-radius: 0.5rem;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: "Baloo";
+    src: url("resources/fonts/BalooThambi.ttf");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face{
+    font-family: "Bowlby";
+    src: url("resources/fonts/BowlbyOne.ttf");
+    font-weight: bold;
+    font-style: normal;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+div.topBar{
+    background: var(--navbar-color);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button.navButton{
+    border: none;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    font-family: "Baloo", sans-serif;
+    color: var(--primary-text-color-light);
+    border-radius: var(--button-border-radius);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+button.navButton:hover{
+    color: var(--secondary-text-color-light);
+    background: var(--trasparent-grey);
+}
+
+button.navButton.highlighted{
+    background-color: var(--bg-color-dark);
+}
+
+button.navButton.highlighted:hover{
+    filter: brightness(0.8);
+}
+
