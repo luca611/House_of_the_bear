@@ -1,6 +1,7 @@
 :root {
     --navbar-color:#664343;
     --bg-color-light: #5F3F3F;
+    --bg-color-medium: #4A3333;
     --bg-color-dark: #3B3030;
     --trasparent-grey: rgba(0, 0, 0, 0.5);
     --primary-text-color-light: #F9F5E8;
@@ -34,6 +35,7 @@
 body{
     margin: 0;
     padding: 0;
+    margin-top: 4rem;
 }
 
 div.topBar{
@@ -41,13 +43,15 @@ div.topBar{
     top: 0;
     left: 0;
     right: 0;
-    z-index: 2;
+    z-index: 3;
     background: var(--navbar-color);
     padding: 0.7rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-shadow: var(--light-shadow);
+    height: 4rem;
+    max-height: 4rem;
 }
 
 button.navButton{
@@ -80,6 +84,7 @@ h1.logoText{
     font-size: 1.5rem;
     color: var(--primary-text-color-light);
     margin: 0;
+    transition: all 0.3s;
 }
 
 div.logo{
@@ -93,24 +98,31 @@ img.logoImage{
     height: 2rem;
 }
 
+div.landingSection{
+    width: 100vw;
+    height: calc(100vh - 4rem);
+    margin: 0;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    background: var(--bg-color-light);
+}
+
 div.section{
     width: 100vw;
-    height: 100vh;
+    height: calc(100vh - 4rem);
     margin:0;
     position: relative;
 }
 
 div.innerDarker{
-    position: absolute;
-    top: calc(5vh + 4.4rem);
-    bottom: 5vh;
+    position: absolute; 
     height: auto;
-
-    left: 5vw;
-    right: 5vw;
     width: auto;
     border-radius: var(--div-border-radius);
-    background: var(--bg-color-dark) url("resources/imgs/pattern.svg");
+    background: var(--bg-color-medium) url(resources/imgs/pattern.svg);
+    width: 80%;
+    height: 80%;
 }
 
 div.section.light{
@@ -123,11 +135,13 @@ div.section.dark{
 
 img.paw{
     position: absolute;
-    top: 30vh;
+    top: 35vh;
     left: 0;
-    height: 50vh;
+    height: 65vh;
     aspect-ratio: 1/1;
     z-index: 1;
+    transition: all 0.3s;
+    max-height: 30rem;
 }
 
 img.paw.right{
@@ -136,4 +150,83 @@ img.paw.right{
     transform: scaleX(-1);
 }
 
+h1.mainTitle{
+    width: 90%;
+    left: 5%;
+    margin-top: 10vh;
+    text-align: center;
+    position: relative;
+    font-family: "Bowlby", sans-serif;
+    font-size: 5rem;
+    color: var(--primary-text-color-light);
+    padding: 0;
+    margin-bottom: 0rem;
+}
+
+h2.subTitle{
+    width: 90%;
+    left: 5%;
+    text-align: center;
+    position: relative;
+    font-family: "Baloo", sans-serif;
+    font-size: 2rem;
+    color: var(--primary-text-color-light);
+    margin: 0;
+    padding: 0;
+}
+
+div.quicks{
+    width: 80%;
+    margin-left: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+button.quick{
+    display: flex;
+    border: none;
+    font-size: 1.2rem;        
+    padding: 0.5rem 1rem;
+    height: 3rem;
+    width: 6.5rem;
+    background: var(--bg-color-dark);
+    font-family: "Baloo", sans-serif;
+    color: var(--primary-text-color-light);
+    border-radius: var(--button-border-radius);
+    cursor: pointer;
+    transition: all 0.3s;
+    justify-content: center;
+    align-items: center;
+}
+
+button.quick:hover{
+    filter: brightness(0.8);
+}
+
+
+
+@media screen and (max-width: 45rem) {
+    h1.mainTitle{
+        font-size: 3rem;
+    }
+    h2.subTitle{
+        font-size: 1.5rem;
+    }
+    h1.logoText{
+        opacity: 0;
+        z-index: -1;
+        left: 3.4rem;
+        position: absolute;
+    }
+}
+
+@media screen and (max-width: 71rem) {
+    img.paw{
+        height: 0vh;
+    }
+}
 
