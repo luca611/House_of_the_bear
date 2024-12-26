@@ -1,5 +1,5 @@
 :root {
-    --navbar-color:#664343;
+    --navbar-color: #664343;
     --bg-color-light: #5F3F3F;
     --bg-color-medium: #4A3333;
     --bg-color-dark: #3B3030;
@@ -12,6 +12,8 @@
 
     --button-border-radius: 0.3rem;
     --div-border-radius: 0.5rem;
+
+    --large-breakpoint: 96rem;
 }
 
 * {
@@ -25,20 +27,20 @@
     font-style: normal;
 }
 
-@font-face{
+@font-face {
     font-family: "Bowlby";
     src: url("resources/fonts/BowlbyOne.ttf");
     font-weight: bold;
     font-style: normal;
 }
 
-body{
+body {
     margin: 0;
     padding: 0;
     margin-top: 4rem;
 }
 
-div.topBar{
+div.topBar {
     position: fixed;
     top: 0;
     left: 0;
@@ -54,7 +56,7 @@ div.topBar{
     max-height: 4rem;
 }
 
-button.navButton{
+button.navButton {
     border: none;
     font-size: 1.2rem;
     padding: 0.5rem 1rem;
@@ -66,39 +68,39 @@ button.navButton{
     transition: all 0.3s;
 }
 
-button.navButton:hover{
+button.navButton:hover {
     color: var(--secondary-text-color-light);
     background: var(--trasparent-grey);
 }
 
-button.navButton.highlighted{
+button.navButton.highlighted {
     background-color: var(--bg-color-dark);
 }
 
-button.navButton.highlighted:hover{
+button.navButton.highlighted:hover {
     filter: brightness(0.8);
 }
 
-h1.logoText{
+h1.logoText {
     font-family: "Bowlby", sans-serif;
-    font-size: 1.5rem;
+    font-size: 1rem;
     color: var(--primary-text-color-light);
     margin: 0;
     transition: all 0.3s;
 }
 
-div.logo{
+div.logo {
     display: flex;
     align-items: center;
 }
 
-img.logoImage{
+img.logoImage {
     margin-right: .5rem;
     width: 2rem;
     height: 2rem;
 }
 
-div.landingSection{
+div.landingSection {
     width: 100vw;
     height: calc(100vh - 4rem);
     margin: 0;
@@ -109,75 +111,82 @@ div.landingSection{
     min-height: 40rem;
 }
 
-div.section{
+div.section {
     width: 100vw;
     height: calc(100vh - 4rem);
-    margin:0;
+    margin: 0;
     position: relative;
 }
 
-div.innerDarker{
+div.innerDarker {
     position: absolute;
     height: auto;
     width: auto;
     border-radius: var(--div-border-radius);
     background: var(--bg-color-medium) url(resources/imgs/pattern.svg);
-    width: 80%;
+    width: 95%;
     height: 80%;
     min-height: 35rem;
 }
 
-div.section.light{
+div.section.light {
     background: var(--bg-color-light);
 }
 
-div.section.dark{
+div.section.dark {
     background-color: var(--bg-color-dark);
 }
 
-img.paw{
+img.bear {
     position: absolute;
-    top: 35vh;
-    left: 0;
-    height: 65vh;
-    aspect-ratio: 1/1;
-    z-index: 1;
+    width: 100vw;
+    bottom: 0;
     transition: all 0.3s;
-    max-height: 30rem;
 }
 
-img.paw.right{
-    left: auto;
-    right: 0;
-    transform: scaleX(-1);
+div.separation {
+    width: 100%;
+    height: 2rem;
+    background: red;
+    position: absolute;
+    bottom: 0;
+    z-index: 5;
 }
 
-h1.mainTitle{
+div.separation.dark {
+    background: url("resources/imgs/darkGrass.png") repeat-x bottom;
+}
+
+div.separation.light {
+    background: url("resources/imgs/lightGrass.png") repeat-x bottom;
+}
+
+h1.mainTitle {
     width: 90%;
     left: 5%;
     margin-top: 10vh;
     text-align: center;
     position: relative;
     font-family: "Bowlby", sans-serif;
-    font-size: 5rem;
+    font-size: 8rem;
     color: var(--primary-text-color-light);
     padding: 0;
     margin-bottom: 0rem;
 }
 
-h2.subTitle{
+h2.subTitle {
     width: 90%;
     left: 5%;
     text-align: center;
     position: relative;
     font-family: "Baloo", sans-serif;
-    font-size: 2rem;
+    font-size: 3rem;
     color: var(--primary-text-color-light);
     margin: 0;
     padding: 0;
 }
 
-div.quicks{
+div.quicks {
     width: 80%;
     margin-left: 10%;
     display: flex;
@@ -188,10 +197,10 @@ div.quicks{
     flex-wrap: wrap;
 }
 
-button.quick{
+button.quick {
     display: flex;
     border: none;
-    font-size: 1.2rem;        
+    font-size: 1.2rem;
     padding: 0.5rem 1rem;
     height: 3rem;
     width: 6.5rem;
@@ -205,24 +214,41 @@ button.quick{
     align-items: center;
 }
 
-button.quick img{
+button.quick img {
     width: 2rem;
 }
 
-button.quick:hover{
+button.quick:hover {
     filter: brightness(0.8);
 }
 
+@media screen and (max-width: 96rem) {
+    h1.mainTitle {
+        font-size: 5rem;
+    }
 
+    h2.subTitle {
+        font-size: 2rem;
+    }
+
+}
+
+@media screen and (max-width: 71rem) {
+    img.paw {
+        height: 0vh;
+    }
+}
 
 @media screen and (max-width: 45rem) {
-    h1.mainTitle{
+    h1.mainTitle {
         font-size: 3rem;
     }
-    h2.subTitle{
+
+    h2.subTitle {
         font-size: 1.5rem;
     }
-    h1.logoText{
+
+    h1.logoText {
         opacity: 0;
         z-index: -1;
         left: 3.4rem;
@@ -230,9 +256,18 @@ button.quick:hover{
     }
 }
 
-@media screen and (max-width: 71rem) {
-    img.paw{
-        height: 0vh;
+@media screen and (max-height: 55rem) {
+
+    img.bear {
+        width: 50vw;
     }
+
 }
 
+@media screen and (max-height: 45rem) {
+
+    img.bear {
+        width: 0;
+    }
+
+}
