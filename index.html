@@ -7,22 +7,24 @@
     <script src="app.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body onload="showTodaysSpecial()">
     <div class="topBar">
-        <div class="logo">
-            <img src="resources/imgs/logo.webp" alt="logo" class="logoImage">
-            <h1 class="logoText"> house of the bear</h1>
-        </div>
+        <a class="noDecoration" href="#landing">    
+            <div class="logo">
+                <img src="resources/imgs/logo.webp" alt="logo" class="logoImage">
+                <h1 class="logoText"> house of the bear</h1>
+            </div>
+        </a>
         <div class="links">
-            <button class="navButton">
-                find us
-            </button>
-            <button class="navButton">
+            <a class="navButton" href="#events">
                 events
-            </button>
-            <button class="navButton">
+            </a>
+            <a class="navButton" href="#menu">
                 menu
-            </button>
+            </a>
+            <a href="#findUs" class="navButton" >
+                find us
+            </a>
             <button class="navButton highlighted">
                 book
             </button>
@@ -31,15 +33,18 @@
             </button>
             
             <div class="mobileNav">
-                <button class="mobileNavButton">
-                    find us
-                </button>
-                <button class="mobileNavButton">
+                <a class="mobileNavButton">
                     events
-                </button>
-                <button class="mobileNavButton">
+                </a>
+                <hr class="mobileNavSeparator">
+                <a class="mobileNavButton">
                     menu
-                </button>
+                </a>
+                <hr class="mobileNavSeparator">
+                <a class="mobileNavButton">
+                    find us
+                </a>
+                <hr class="mobileNavSeparator">
                 <button class="mobileNavButton">
                     book
                 </button>
@@ -49,8 +54,8 @@
         
     </div>
 
-    <div class="main">
-        <div class="landingSection light">
+    <div class="main" id="main">
+        <div class="landingSection light" id="landing">
             <div class="innerDarker">
                 
                 <h1 class="mainTitle">House of the Bear</h1>
@@ -77,15 +82,15 @@
             <div class="ad"></div>
             <div class="separation light"></div>
         </div>
-        <div class="section removeMinHeight light">
+        <div class="section removeMinHeight light" id="menu">
             <h2 class="sectionTitle">Menu</h2>
             <h3 class="sectionSubtitle">Enjoy the taste of sustainable food </h3>
             <div class="menuWrap">
                 <div class="menuSection">
                     <div class="dailyMenu">
                         <h4 class="dailyMenuTitle">Today's Specials</h4>
-                        <img src="resources/imgs/waiter1.webp" alt="dailyMenu" class="dailyMenuImg">
-                        <button class="dailyMenuButton">View the full menu</button>
+                        <img src="resources/imgs/waiter1.webp" alt="dailyMenu" class="dailyMenuImg" id="dailyMenuImg">
+                        <button class="dailyMenuButton" onclick="loadDailyMenu()">View the full menu</button>
                     </div>
                 </div>
                 <div class="menuSection">
@@ -93,28 +98,28 @@
                         <div class="menuItem">
                             <img src="resources/icons/drink.svg" alt="drink" class="munuIcon">
                             <h4 class="menuItemTitle">Drinks</h4>
-                            <button class="menuItemButton">View</button>
+                            <button class="menuItemButton" onclick="loadDrinks()">View</button>
                         </div>
                     </div>
                     <div class="menuSubsection">
                         <div class="menuItem">
                             <img src="resources/icons/dessert.svg" alt="dessert" class="munuIcon">
                             <h4 class="menuItemTitle">Desserts</h4>
-                            <button class="menuItemButton">View</button>
+                            <button class="menuItemButton" onclick="loadDesserts()">View</button>
                         </div>
                     </div>
                     <div class="menuSubsection">
                         <div class="menuItem">
                             <img src="resources/icons/dish.svg" alt="dish" class="munuIcon">
                             <h4 class="menuItemTitle">Main Courses</h4>
-                            <button class="menuItemButton">View</button>
+                            <button class="menuItemButton" onclick="loadFirstCourses()">View</button>
                         </div>
                     </div>
                     <div class="menuSubsection">
                         <div class="menuItem">
                             <img src="resources/icons/chef.svg" alt="chef" class="munuIcon">
                             <h4 class="menuItemTitle">Chef's Specials</h4>
-                            <button class="menuItemButton">View</button>
+                            <button class="menuItemButton" onclick="loadChefSpecials()">View</button>
                         </div>
                     </div>
                 </div>
@@ -168,6 +173,101 @@
         </div>
         <div class="footer">
             
+        </div>
+    </div>
+
+    <div class="menu hidden" id="menuPage">
+        <div class="menuTitle">
+            <h1 class="menuTitleText" id="menuTitle">Menu</h1>
+        </div>
+        <div class="menuBody">
+            <div class="topDecoration"></div>
+            <div class="dishScroll" id="dishScroll">
+                <div class="dish">
+                    <img src="resources/imgs/waiter1.webp" alt="dish" class="dishImage">
+                    <div class="dishInfo">
+                        <h3 class="dishTitle">Dish Title</h3>
+                        <p class="dishDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                            Nullam auctor, nunc nec
+                            fermentum
+                        </p>
+                        <div class="allergens">
+                            <img src="resources/icons/corn.svg" alt="corn" class="allergen">
+                            <img src="resources/icons/gluten.svg" alt="gluten" class="allergen">
+                            <img src="resources/icons/soy.svg" alt="soy" class="allergen">
+                            <img src="resources/icons/nuts.svg" alt="nuts" class="allergen">
+                        </div>
+                        <p class="dishPrice">€ 10.00</p>
+                    </div>
+                </div>
+                <div class="dish">
+                    <img src="resources/imgs/waiter1.webp" alt="dish" class="dishImage">
+                    <div class="dishInfo">
+                        <h3 class="dishTitle">Dish Title</h3>
+                        <p class="dishDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                            Nullam auctor, nunc nec
+                            fermentum
+                        </p>
+                        <div class="allergens">
+                            <img src="resources/icons/corn.svg" alt="corn" class="allergen">
+                            <img src="resources/icons/gluten.svg" alt="gluten" class="allergen">
+                            <img src="resources/icons/soy.svg" alt="soy" class="allergen">
+                            <img src="resources/icons/nuts.svg" alt="nuts" class="allergen">
+                        </div>
+                        <p class="dishPrice">€ 10.00</p>
+                    </div>
+                </div>
+                <div class="dish">
+                    <img src="resources/imgs/waiter1.webp" alt="dish" class="dishImage">
+                    <div class="dishInfo">
+                        <h3 class="dishTitle">Dish Title</h3>
+                        <p class="dishDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                            Nullam auctor, nunc nec
+                            fermentum
+                        </p>
+                        <div class="allergens">
+                            <img src="resources/icons/corn.svg" alt="corn" class="allergen">
+                            <img src="resources/icons/gluten.svg" alt="gluten" class="allergen">
+                            <img src="resources/icons/soy.svg" alt="soy" class="allergen">
+                            <img src="resources/icons/nuts.svg" alt="nuts" class="allergen">
+                        </div>
+                        <p class="dishPrice">€ 10.00</p>
+                    </div>
+                </div><div class="dish">
+                    <img src="resources/imgs/waiter1.webp" alt="dish" class="dishImage">
+                    <div class="dishInfo">
+                        <h3 class="dishTitle">Dish Title</h3>
+                        <p class="dishDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                            Nullam auctor, nunc nec
+                            fermentum
+                        </p>
+                        <div class="allergens">
+                            <img src="resources/icons/corn.svg" alt="corn" class="allergen">
+                            <img src="resources/icons/gluten.svg" alt="gluten" class="allergen">
+                            <img src="resources/icons/soy.svg" alt="soy" class="allergen">
+                            <img src="resources/icons/nuts.svg" alt="nuts" class="allergen">
+                        </div>
+                        <p class="dishPrice">€ 10.00</p>
+                    </div>
+                </div>
+                <div class="dish">
+                    <img src="resources/imgs/waiter1.webp" alt="dish" class="dishImage">
+                    <div class="dishInfo">
+                        <h3 class="dishTitle">Dish Title</h3>
+                        <p class="dishDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                            Nullam auctor, nunc nec
+                            fermentum
+                        </p>
+                        <div class="allergens">
+                            <img src="resources/icons/corn.svg" alt="corn" class="allergen">
+                            <img src="resources/icons/gluten.svg" alt="gluten" class="allergen">
+                            <img src="resources/icons/soy.svg" alt="soy" class="allergen">
+                            <img src="resources/icons/nuts.svg" alt="nuts" class="allergen">
+                        </div>
+                        <p class="dishPrice">€ 10.00</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>

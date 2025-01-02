@@ -1,0 +1,29 @@
+[
+    {
+        "img_url": "resources/specials/truffle_pasta.webp",
+        "title": "Truffle Mushroom Pasta",
+        "description": "Handmade gluten-free pasta tossed with a creamy truffle sauce and wild mushrooms.",
+        "allergenes": [
+            1,
+            2
+        ],
+        "price": 15.99
+    },
+    {
+        "img_url": "resources/specials/stuffed_squash.webp",
+        "title": "Stuffed Acorn Squash",
+        "description": "Roasted acorn squash filled with quinoa, cranberries, and a savory herb blend.",
+        "allergenes": [],
+        "price": 14.49
+    },
+    {
+        "img_url": "resources/specials/eggplant_parm.webp",
+        "title": "Vegan Eggplant Parmesan",
+        "description": "Layers of breaded eggplant, marinara sauce, and cashew mozzarella, baked to perfection.",
+        "allergenes": [
+            1,
+            2
+        ],
+        "price": 13.99
+    }
+]

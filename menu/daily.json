@@ -1,0 +1,249 @@
+{
+    "1": {
+        "drink": {
+            "img_url": "resources/daily/monday_drink.webp",
+            "title": "Green Detox Smoothie",
+            "description": "A refreshing blend of kale, spinach, cucumber, and a hint of lime.",
+            "allergenes": [],
+            "price": 5.99
+        },
+        "dish1": {
+            "img_url": "resources/daily/monday1.webp",
+            "title": "Quinoa and Roasted Veggie Salad",
+            "description": "Quinoa, zucchini, bell peppers, and cherry tomatoes served with a lemon-tahini dressing.",
+            "allergenes": [
+                1
+            ],
+            "price": 10.99
+        },
+        "dish2": {
+            "img_url": "resources/daily/monday2.webp",
+            "title": "Gluten-Free Lentil Burger",
+            "description": "A hearty lentil patty served with avocado and a side of sweet potato fries.",
+            "allergenes": [
+                1,
+                3
+            ],
+            "price": 12.99
+        },
+        "dessert": {
+            "img_url": "resources/daily/monday_dessert.webp",
+            "title": "Vegan Chocolate Avocado Mousse",
+            "description": "Rich and creamy mousse made with avocado, cocoa powder, and maple syrup.",
+            "allergenes": [
+                2
+            ],
+            "price": 6.49
+        }
+    },
+    "2": {
+        "drink": {
+            "img_url": "resources/daily/tuesday_drink.webp",
+            "title": "Berry Blast Smoothie",
+            "description": "A mix of blueberries, raspberries, and strawberries with almond milk.",
+            "allergenes": [
+                2
+            ],
+            "price": 6.49
+        },
+        "dish1": {
+            "img_url": "resources/daily/tuesday1.webp",
+            "title": "Stuffed Bell Peppers",
+            "description": "Bell peppers stuffed with brown rice, black beans, and a tomato-based sauce.",
+            "allergenes": [],
+            "price": 9.99
+        },
+        "dish2": {
+            "img_url": "resources/daily/tuesday2.webp",
+            "title": "Creamy Cashew Alfredo Pasta",
+            "description": "Gluten-free pasta served with a rich cashew-based Alfredo sauce.",
+            "allergenes": [
+                2
+            ],
+            "price": 11.99
+        },
+        "dessert": {
+            "img_url": "resources/daily/tuesday_dessert.webp",
+            "title": "Chia Pudding with Mango",
+            "description": "Chia seeds soaked in coconut milk, topped with fresh mango slices.",
+            "allergenes": [],
+            "price": 5.49
+        }
+    },
+    "3": {
+        "drink": {
+            "img_url": "resources/daily/wednesday_drink.webp",
+            "title": "Cucumber Mint Cooler",
+            "description": "A hydrating blend of cucumber, mint, and a splash of lemon juice.",
+            "allergenes": [],
+            "price": 5.99
+        },
+        "dish1": {
+            "img_url": "resources/daily/wednesday1.webp",
+            "title": "Sweet Potato and Chickpea Buddha Bowl",
+            "description": "A mix of roasted sweet potatoes, chickpeas, spinach, and a tahini drizzle.",
+            "allergenes": [
+                1
+            ],
+            "price": 10.49
+        },
+        "dish2": {
+            "img_url": "resources/daily/wednesday2.webp",
+            "title": "Zucchini Noodles with Pesto",
+            "description": "Zucchini noodles topped with a nut-free basil pesto sauce.",
+            "allergenes": [],
+            "price": 9.99
+        },
+        "dessert": {
+            "img_url": "resources/daily/wednesday_dessert.webp",
+            "title": "Vegan Coconut Macaroons",
+            "description": "Chewy macaroons made with shredded coconut and maple syrup.",
+            "allergenes": [
+                2
+            ],
+            "price": 4.99
+        }
+    },
+    "4": {
+        "drink": {
+            "img_url": "resources/daily/thursday_drink.webp",
+            "title": "Golden Turmeric Latte",
+            "description": "A warm blend of turmeric, almond milk, and a touch of cinnamon.",
+            "allergenes": [
+                2
+            ],
+            "price": 5.99
+        },
+        "dish1": {
+            "img_url": "resources/daily/thursday1.webp",
+            "title": "Mediterranean Quinoa Bowl",
+            "description": "Quinoa, olives, cherry tomatoes, cucumbers, and a tangy tahini dressing.",
+            "allergenes": [
+                1
+            ],
+            "price": 11.49
+        },
+        "dish2": {
+            "img_url": "resources/daily/thursday2.webp",
+            "title": "Black Bean Tacos",
+            "description": "Soft corn tortillas filled with black beans, avocado, and salsa.",
+            "allergenes": [
+                3
+            ],
+            "price": 10.99
+        },
+        "dessert": {
+            "img_url": "resources/daily/thursday_dessert.webp",
+            "title": "Apple Crumble",
+            "description": "Warm spiced apples topped with a gluten-free oat crumble.",
+            "allergenes": [],
+            "price": 6.49
+        }
+    },
+    "5": {
+        "drink": {
+            "img_url": "resources/daily/friday_drink.webp",
+            "title": "Pineapple Coconut Cooler",
+            "description": "A tropical mix of pineapple juice and coconut water.",
+            "allergenes": [],
+            "price": 6.49
+        },
+        "dish1": {
+            "img_url": "resources/daily/friday1.webp",
+            "title": "Roasted Veggie Wrap",
+            "description": "A gluten-free wrap filled with roasted vegetables and hummus.",
+            "allergenes": [
+                1
+            ],
+            "price": 9.99
+        },
+        "dish2": {
+            "img_url": "resources/daily/friday2.webp",
+            "title": "Thai Peanut Noodle Salad",
+            "description": "Rice noodles, vegetables, and a spicy peanut sauce.",
+            "allergenes": [
+                1,
+                2
+            ],
+            "price": 12.49
+        },
+        "dessert": {
+            "img_url": "resources/daily/friday_dessert.webp",
+            "title": "Banana Nice Cream",
+            "description": "Frozen bananas blended into a creamy, dairy-free dessert.",
+            "allergenes": [],
+            "price": 5.49
+        }
+    },
+    "6": {
+        "drink": {
+            "img_url": "resources/daily/saturday_drink.webp",
+            "title": "Watermelon Lime Refresher",
+            "description": "Fresh watermelon juice with a splash of lime.",
+            "allergenes": [],
+            "price": 5.99
+        },
+        "dish1": {
+            "img_url": "resources/daily/saturday1.webp",
+            "title": "Vegan Sushi Rolls",
+            "description": "Nori rolls filled with avocado, cucumber, and carrots, served with tamari sauce.",
+            "allergenes": [
+                1
+            ],
+            "price": 11.99
+        },
+        "dish2": {
+            "img_url": "resources/daily/saturday2.webp",
+            "title": "Spaghetti Squash Primavera",
+            "description": "Spaghetti squash tossed with a medley of fresh vegetables and tomato sauce.",
+            "allergenes": [],
+            "price": 10.49
+        },
+        "dessert": {
+            "img_url": "resources/daily/saturday_dessert.webp",
+            "title": "Lemon Coconut Bliss Balls",
+            "description": "Energy bites made with coconut, dates, and a hint of lemon.",
+            "allergenes": [
+                2
+            ],
+            "price": 4.99
+        }
+    },
+    "7": {
+        "drink": {
+            "img_url": "resources/daily/sunday_drink.webp",
+            "title": "Orange Ginger Zinger",
+            "description": "Fresh orange juice with a spicy hint of ginger.",
+            "allergenes": [],
+            "price": 6.49
+        },
+        "dish1": {
+            "img_url": "resources/daily/sunday1.webp",
+            "title": "Grilled Portobello Mushroom Steak",
+            "description": "Marinated portobello mushrooms served with garlic mashed potatoes.",
+            "allergenes": [
+                1
+            ],
+            "price": 12.99
+        },
+        "dish2": {
+            "img_url": "resources/daily/sunday2.webp",
+            "title": "Vegetable Stir-fry with Brown Rice",
+            "description": "A colorful mix of vegetables stir-fried in a soy-ginger sauce, served over brown rice.",
+            "allergenes": [
+                1,
+                3
+            ],
+            "price": 11.49
+        },
+        "dessert": {
+            "img_url": "resources/daily/sunday_dessert.webp",
+            "title": "Raw Date and Nut Bar",
+            "description": "A wholesome bar made with dates, almonds, and walnuts.",
+            "allergenes": [
+                2
+            ],
+            "price": 4.99
+        }
+    }
+}

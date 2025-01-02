@@ -1,0 +1,36 @@
+[
+    {
+        "img_url": "resources/desserts/chocolate_cake.webp",
+        "title": "Vegan Chocolate Lava Cake",
+        "description": "A rich and gooey chocolate cake made with almond flour and dark chocolate.",
+        "allergenes": [
+            2
+        ],
+        "price": 6.99
+    },
+    {
+        "img_url": "resources/desserts/mango_tart.webp",
+        "title": "Mango Coconut Tart",
+        "description": "A tropical tart with a coconut crust and creamy mango filling.",
+        "allergenes": [
+            2
+        ],
+        "price": 5.99
+    },
+    {
+        "img_url": "resources/desserts/berry_parfait.webp",
+        "title": "Mixed Berry Parfait",
+        "description": "Layers of fresh berries, coconut yogurt, and gluten-free granola.",
+        "allergenes": [],
+        "price": 5.49
+    },
+    {
+        "img_url": "resources/desserts/peanut_cookie.webp",
+        "title": "Peanut Butter Cookie Sandwich",
+        "description": "Chewy peanut butter cookies filled with dairy-free chocolate ganache.",
+        "allergenes": [
+            2
+        ],
+        "price": 4.99
+    }
+]

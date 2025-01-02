@@ -1,6 +1,7 @@
 :root {
     --navbar-color: #664343;
     --mobile-nav-color: #584040;
+    --dish-background-color: #413131;
     --bg-color-light: #5F3F3F;
     --bg-color-medium: #4A3333;
     --bg-color-dark: #3B3030;
@@ -43,8 +44,11 @@ body {
     margin-top: 4rem;
 }
 
+.hidden {
+    display: none !important;
+}
+
 div.main {
-    scroll-snap-type: y proximity;
     overflow-y: scroll;
     height: calc(100vh - 4rem);
     scroll-behavior: smooth;
@@ -95,7 +99,8 @@ div.topBar {
     max-height: 4rem;
 }
 
-button.navButton {
+.navButton {
+    text-decoration: none;
     border: none;
     font-size: 1.2rem;
     padding: 0.5rem 1rem;
@@ -107,16 +112,16 @@ button.navButton {
     transition: all 0.3s;
 }
 
-button.navButton:hover {
+.navButton:hover {
     color: var(--secondary-text-color-light);
     background: var(--trasparent-grey);
 }
 
-button.navButton.highlighted {
+.navButton.highlighted {
     background-color: var(--bg-color-dark);
 }
 
-button.navButton.highlighted:hover {
+.navButton.highlighted:hover {
     filter: brightness(0.8);
 }
 
@@ -154,6 +159,11 @@ p.text {
     color: var(--secondary-text-color-light);
     margin: 0;
     text-align: left;
+}
+
+a.noDecoration {
+    text-decoration: none;
+    color: var(--primary-text-color-light);
 }
 
 div.textWithIcon {
@@ -362,7 +372,8 @@ div.mobileNav {
     z-index: 9;
 }
 
-button.mobileNavButton {
+.mobileNavButton {
+    text-align: left;
     border: none;
     font-size: 1.2rem;
     padding: 0.5rem 1rem;
@@ -374,7 +385,7 @@ button.mobileNavButton {
     transition: all 0.3s;
 }
 
-button.mobileNavButton:hover {
+.mobileNavButton:hover {
     color: var(--secondary-text-color-light);
     background: var(--trasparent-grey);
 }
@@ -622,6 +633,132 @@ button.dailyMenuButton:hover {
     filter: brightness(0.8);
 }
 
+hr.mobileNavSeparator {
+    width: 100%;
+    border: solid 0.1rem var(--bg-color-dark);
+    margin: 0;
+    opacity: 0.3;
+}
+
+/* menu styles */
+
+div.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    height: calc(100vh - 4rem);
+    min-height: 40rem;
+    background-color: var(--bg-color-light);
+    align-items: center;
+}
+
+div.menuBody {
+    background-color: var(--bg-color-dark);
+    flex-grow: 1;
+    width: 80%;
+}
+
+h1.menuTitleText {
+    font-family: var(--heading-font);
+    font-size: 3rem;
+    color: var(--primary-text-color-light);
+    margin: 0;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+div.menuBody {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    padding-top: 4rem;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+
+div.topDecoration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2rem;
+    background: url("resources/imgs/menuTopDecoration.png") var(--bg-color-light) repeat-x bottom;
+}
+
+div.dish {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--dish-background-color);
+    border-radius: var(--div-border-radius);
+    box-shadow: var(--light-shadow);
+}
+
+img.dishImage {
+    width: 20%;
+    min-width: 10rem;
+    height: auto;
+    min-height: 10rem;
+    object-fit: cover;
+}
+
+div.dishInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 50%;
+}
+
+h3.dishTitle {
+    font-family: var(--heading-font);
+    font-size: 2rem;
+    color: var(--primary-text-color-light);
+    margin: 0;
+    padding: 0;
+}
+
+p.dishDescription {
+    font-family: sans-serif;
+    font-size: 1.5rem;
+    color: var(--secondary-text-color-light);
+    margin: 0;
+    padding: 0;
+}
+
+p.dishPrice {
+    font-family: var(--subtitle-font);
+    font-size: 1.5rem;
+    color: var(--primary-text-color-light);
+    margin: 0;
+    padding: 0;
+}
+
+div.allergens {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    height: 1.5rem;
+}
+
+img.allergen {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+div.dishScroll {
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 @keyframes slideIn {
     from {
         opacity: 0;
@@ -679,6 +816,34 @@ button.dailyMenuButton:hover {
 
 @media screen and (max-width: 45rem) {
 
+    h1.menuTitleText {
+        font-size: 2rem;
+        margin: 0;
+        padding: 0rem;
+        padding-top: 1rem;
+    }
+
+    div.menuBody {
+        width: 100%;
+    }
+
+    div.dish {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    h3.dishTitle {
+        font-size: 1.5rem;
+    }
+
+    p.dishDescription {
+        font-size: 1rem;
+    }
+
+    div.dishInfo {
+        width: 100%;
+    }
+
     h1.mainTitle {
         font-size: 3rem;
     }
@@ -699,12 +864,13 @@ button.dailyMenuButton:hover {
         height: 0;
     }
 
-    button.navButton {
+    .navButton {
         display: none;
     }
 
     button.mobile {
         display: block;
+        text-align: center;
     }
 
     div.chefBox {

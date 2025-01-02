@@ -1,0 +1,32 @@
+[
+    {
+        "img_url": "resources/drinks/matcha_latte.webp",
+        "title": "Iced Matcha Latte",
+        "description": "A refreshing blend of ceremonial grade matcha and oat milk, lightly sweetened.",
+        "allergenes": [
+            2
+        ],
+        "price": 4.99
+    },
+    {
+        "img_url": "resources/drinks/blueberry_smoothie.webp",
+        "title": "Blueberry Basil Smoothie",
+        "description": "A vibrant mix of fresh blueberries, basil, and coconut water.",
+        "allergenes": [],
+        "price": 5.49
+    },
+    {
+        "img_url": "resources/drinks/turmeric_ginger_tonic.webp",
+        "title": "Turmeric Ginger Tonic",
+        "description": "A zesty drink with turmeric, ginger, lemon, and a touch of maple syrup.",
+        "allergenes": [],
+        "price": 4.49
+    },
+    {
+        "img_url": "resources/drinks/berry_mojito.webp",
+        "title": "Berry Mint Mojito",
+        "description": "A mocktail with mixed berries, fresh mint, lime, and soda water.",
+        "allergenes": [],
+        "price": 5.99
+    }
+]
