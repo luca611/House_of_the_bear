@@ -8,47 +8,34 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body onload="showTodaysSpecial()">
-    <div class="topBar">
+    <div class="topBar" id="topBar">
         <a class="noDecoration" href="#landing">    
             <div class="logo">
                 <img src="resources/imgs/logo.webp" alt="logo" class="logoImage">
                 <h1 class="logoText"> house of the bear</h1>
             </div>
         </a>
-        <div class="links">
-            <a class="navButton" href="#events">
-                events
-            </a>
-            <a class="navButton" href="#menu">
-                menu
-            </a>
-            <a href="#findUs" class="navButton" >
-                find us
-            </a>
-            <button class="navButton highlighted">
-                book
-            </button>
-            <button class="navButton highlighted mobile">
+        <div class="links"">
+            <a class="navButton" href="#events">events</a>
+            <a class="navButton" href="#menu">menu</a>
+            <a href="#findUs" class="navButton">find us</a>
+            <button class="navButton highlighted" onclick="showbooking()">book</button>
+        
+            <input type="checkbox" id="toggleMenu" class="toggleMenu" hidden>
+        
+            <label for="toggleMenu" class="navButton mobile highlighted">
                 ☰
-            </button>
-            
+            </label>
+        
+            <!-- The mobile navigation menu -->
             <div class="mobileNav">
-                <a class="mobileNavButton">
-                    events
-                </a>
+                <a class="mobileNavButton" href="#events">events</a>
                 <hr class="mobileNavSeparator">
-                <a class="mobileNavButton">
-                    menu
-                </a>
+                <a class="mobileNavButton" href="#menu">menu</a>
                 <hr class="mobileNavSeparator">
-                <a class="mobileNavButton">
-                    find us
-                </a>
+                <a class="mobileNavButton" href="#findUs">find us</a>
                 <hr class="mobileNavSeparator">
-                <button class="mobileNavButton">
-                    book
-                </button>
-    
+                <button class="mobileNavButton highlighted" onclick="showbooking()">book</button>
             </div>
         </div>
         
@@ -61,9 +48,9 @@
                 <h1 class="mainTitle">House of the Bear</h1>
                 <h2 class="subTitle">Savor the Flavors of the Wild.</h2>
                 <div class="quicks">
-                    <button class="quick"><img src="resources/icons/facebook.svg" alt="facebook"></button>
-                    <button class="quick"><img src="resources/icons/instagram.svg" alt="instagram"></button>
-                    <button class="quick"><img src="resources/icons/tripadvisor.svg" alt="tripadvisor"></button>
+                    <button class="quick" onclick="window.open('https://www.facebook.com', '_blank')"><img src="resources/icons/facebook.svg" alt="facebook" ></button>
+                    <button class="quick" onclick="window.open('https://www.instagram.com', '_blank') " ><img src="resources/icons/instagram.svg" alt="instagram"></button>
+                    <button class="quick" onclick="window.open('https://www.tripadvisor.com', '_blank')""><img src="resources/icons/tripadvisor.svg" alt="tripadvisor"></button>
                 </div>
             </div>
             <img src="resources/imgs/tree.png" alt="tree" class="tree dx tall">
@@ -172,13 +159,51 @@
             <div class="separation dark"></div>
         </div>
         <div class="footer">
-            
+            <div class = "footerSection sx">
+                <h3 class="footerTitle">Contact or find us</h3>
+                <div class="textWithIcon">
+                    <img src="resources/icons/phone.svg" alt="" class="icon">
+                    <p class="text">+39 ### ### ####</p>
+                </div>
+                <div class="textWithIcon">
+                    <img src="resources/icons/location.svg" alt="" class="icon">
+                    <p class="text">Strada Provinciale 73 bis</p>
+                </div>
+            </div>
+            <div class = "footerSection dx">
+                <h3 class="footerTitle">Our pages and business email</h3>
+                <div class="socials">
+                    <button class="social" onclick="window.open('https://www.facebook.com', '_blank')"><img src="resources/icons/facebook.svg" alt="facebook"></button>
+                    <button class="social" onclick="window.open('https://www.instagram.com', '_blank')"><img src="resources/icons/instagram.svg" alt="instagram"></button>
+                    <button class="social" onclick="window.open('https://www.tripadvisor.com', '_blank')"><img src="resources/icons/tripadvisor.svg" alt="tripadvisor"></button>
+                    <button class="social" onclick="window.location.href='mailto:house.ofthebear@myresturant.com'"><img src="resources/icons/mail.svg" alt="mail"></button>
+                </div>
+            </div>
         </div>
     </div>
-
     <div class="menu hidden" id="menuPage">
         <div class="menuTitle">
             <h1 class="menuTitleText" id="menuTitle">Menu</h1>
+        </div>
+        <button class="closeButton" onclick="closeMenu()">X</button>
+        <button class="infoButton">?</button>
+        <div class="menuInfos">
+            <div class="textWithIcon">
+                <img src="resources/icons/gluten.svg" alt="location" class="icon">
+                <p class="text">Gluten</p>
+            </div>
+            <div class="textWithIcon">
+                <img src="resources/icons/soy.svg" alt="time" class="icon">
+                <p class="text">Soy</p>
+            </div>
+            <div class="textWithIcon">
+                <img src="resources/icons/nuts.svg" alt="time" class="icon">
+                <p class="text">Nuts</p>
+            </div>
+            <div class="textWithIcon">
+                <img src="resources/icons/corn.svg" alt="time" class="icon">
+                <p class="text">Corn</p>
+            </div>
         </div>
         <div class="menuBody">
             <div class="topDecoration"></div>
@@ -200,74 +225,62 @@
                         <p class="dishPrice">€ 10.00</p>
                     </div>
                 </div>
-                <div class="dish">
-                    <img src="resources/imgs/waiter1.webp" alt="dish" class="dishImage">
-                    <div class="dishInfo">
-                        <h3 class="dishTitle">Dish Title</h3>
-                        <p class="dishDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                            Nullam auctor, nunc nec
-                            fermentum
-                        </p>
-                        <div class="allergens">
-                            <img src="resources/icons/corn.svg" alt="corn" class="allergen">
-                            <img src="resources/icons/gluten.svg" alt="gluten" class="allergen">
-                            <img src="resources/icons/soy.svg" alt="soy" class="allergen">
-                            <img src="resources/icons/nuts.svg" alt="nuts" class="allergen">
-                        </div>
-                        <p class="dishPrice">€ 10.00</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="book hidden" id="bookPage">
+        <div class="bookSection">
+            <div class="formContainer">
+                <div class="row">
+                    <div class="halfRow">
+                        <p class="fieldLabel">Name</p>
+                        <input type="text" class="input" id="name">
+                    </div>
+                    <div class="halfRow">
+                        <p class="fieldLabel">Last name</p>
+                        <input type="text" class="input" id="surname">
                     </div>
                 </div>
-                <div class="dish">
-                    <img src="resources/imgs/waiter1.webp" alt="dish" class="dishImage">
-                    <div class="dishInfo">
-                        <h3 class="dishTitle">Dish Title</h3>
-                        <p class="dishDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                            Nullam auctor, nunc nec
-                            fermentum
-                        </p>
-                        <div class="allergens">
-                            <img src="resources/icons/corn.svg" alt="corn" class="allergen">
-                            <img src="resources/icons/gluten.svg" alt="gluten" class="allergen">
-                            <img src="resources/icons/soy.svg" alt="soy" class="allergen">
-                            <img src="resources/icons/nuts.svg" alt="nuts" class="allergen">
-                        </div>
-                        <p class="dishPrice">€ 10.00</p>
-                    </div>
-                </div><div class="dish">
-                    <img src="resources/imgs/waiter1.webp" alt="dish" class="dishImage">
-                    <div class="dishInfo">
-                        <h3 class="dishTitle">Dish Title</h3>
-                        <p class="dishDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                            Nullam auctor, nunc nec
-                            fermentum
-                        </p>
-                        <div class="allergens">
-                            <img src="resources/icons/corn.svg" alt="corn" class="allergen">
-                            <img src="resources/icons/gluten.svg" alt="gluten" class="allergen">
-                            <img src="resources/icons/soy.svg" alt="soy" class="allergen">
-                            <img src="resources/icons/nuts.svg" alt="nuts" class="allergen">
-                        </div>
-                        <p class="dishPrice">€ 10.00</p>
+                <div class="row">
+                    <div class="fullRow">
+                        <p class="fieldLabel">How many people?</p>
+                        <input type="number" class="input" id="people" min="1" max="12">
                     </div>
                 </div>
-                <div class="dish">
-                    <img src="resources/imgs/waiter1.webp" alt="dish" class="dishImage">
-                    <div class="dishInfo">
-                        <h3 class="dishTitle">Dish Title</h3>
-                        <p class="dishDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                            Nullam auctor, nunc nec
-                            fermentum
-                        </p>
-                        <div class="allergens">
-                            <img src="resources/icons/corn.svg" alt="corn" class="allergen">
-                            <img src="resources/icons/gluten.svg" alt="gluten" class="allergen">
-                            <img src="resources/icons/soy.svg" alt="soy" class="allergen">
-                            <img src="resources/icons/nuts.svg" alt="nuts" class="allergen">
+                <div class="row">
+                    <div class="halfRow">
+                        <p class="fieldLabel">Date</p>
+                        <input type="date" class="input" id="date">
+                    </div>
+                    <div class="halfRow">
+                        <p class="fieldLabel">Time</p>
+                        <input type="time" class="input" id="time">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="fullRow">
+                        <p class="fieldLabel">Phone number</p>
+                        <input class="input" type="tel" id="phoneNumber"></input>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="fullRow">
+                        <p class="error" id="error"></p>
+                        <div class="row">
+                            <div class="halfRow">
+                                <button class="submitButton close" onclick="closeBooking()">Close</button>
+                            </div>
+                            <div class="halfRow">
+                                <button class="submitButton" onclick="submitBooking()">Submit</button>
+                            </div>
                         </div>
-                        <p class="dishPrice">€ 10.00</p>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="bookSection decoration">
+            <img src="resources/imgs/decorationImgs2.webp" alt="decoration" class="bookDecorationImgs"> 
         </div>
     </div>
 </body>

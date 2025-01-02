@@ -21,10 +21,13 @@ function showTodaysSpecial() {
 }
 
 function swapToMenu() {
+    document.getElementById("topBar").classList.add("hidden");
     document.getElementById("main").classList.add("hidden");
     document.getElementById("menuPage").classList.remove("hidden");
     document.getElementById("dishScroll").innerHTML = "";
 }
+
+var currentMenu = 0;
 
 /*
     funzione che si occupa di appendere un piatto alla pagina del menu:
@@ -42,11 +45,11 @@ function appendDish(title, description, img_url, allergens, price) {
     infoCont.classList.add("dishInfo");
 
     const name = document.createElement("h3");
-    name.textContent = title;
+    name.innerText = title;
     name.classList.add("dishTitle");
 
     const desc = document.createElement("p");
-    desc.textContent = description;
+    desc.innerText = description;
     desc.classList.add("dishDescription");
 
     const allergensCont = document.createElement("div");
@@ -76,7 +79,7 @@ function appendDish(title, description, img_url, allergens, price) {
 
     const priceEl = document.createElement("p");
     priceEl.classList.add("dishPrice");
-    priceEl.textContent = "€" + price;
+    priceEl.innerText = "€" + price;
 
     infoCont.appendChild(name);
     infoCont.appendChild(desc);
@@ -91,14 +94,15 @@ function appendDish(title, description, img_url, allergens, price) {
 */
 function loadDailyMenu() {
     swapToMenu();
+    document.getElementById("menuTitle").innerText = "Daily Menu";
 
     let xhr = new XMLHttpRequest();
     xhr.onload = function () {
         try {
             const dishes = JSON.parse(xhr.responseText);
+            currentMenu = dishes;
             const today = new Date().getDay();
             const todayDishes = dishes[today];
-
             Object.values(todayDishes).forEach(e => {
                 appendDish(e.title, e.description, e.img_url, e.allergenes, e.price);
             });
@@ -120,6 +124,7 @@ function loadDailyMenu() {
 
 function loadDesserts() {
     swapToMenu();
+    document.getElementById("menuTitle").innerText = "Desserts";
     let xhr = new XMLHttpRequest();
     xhr.onload = function () {
         try {
@@ -144,6 +149,7 @@ function loadDesserts() {
 
 function loadFirstCourses() {
     swapToMenu();
+    document.getElementById("menuTitle").innerText = "Mains Courses";
     let xhr = new XMLHttpRequest();
     xhr.onload = function () {
         try {
@@ -168,6 +174,7 @@ function loadFirstCourses() {
 
 function loadDrinks() {
     swapToMenu();
+    document.getElementById("menuTitle").innerText = "Drinks";
     let xhr = new XMLHttpRequest();
     xhr.onload = function () {
         try {
@@ -192,6 +199,7 @@ function loadDrinks() {
 
 function loadChefSpecials() {
     swapToMenu();
+    document.getElementById("menuTitle").innerText = "Chef Specials";
     let xhr = new XMLHttpRequest();
     xhr.onload = function () {
         try {
@@ -213,7 +221,155 @@ function loadChefSpecials() {
 /*
     funzione per mostrare la pagina principale:
 */
-function showMain() {
+function closeMenu() {
+    document.getElementById("topBar").classList.remove("hidden");
     document.getElementById("main").classList.remove("hidden");
     document.getElementById("menuPage").classList.add("hidden");
+}
+
+/*
+    funzione per mostrare la pagina di prenotazione:
+*/
+function showbooking() {
+    document.getElementById("topBar").classList.add("hidden");
+    document.getElementById("main").classList.add("hidden");
+    document.getElementById("bookPage").classList.remove("hidden");
+}
+
+/*
+    funzione per mostrare la pagina principale:
+*/
+function closeBooking() {
+    document.getElementById("topBar").classList.remove("hidden");
+    document.getElementById("main").classList.remove("hidden");
+    document.getElementById("bookPage").classList.add("hidden");
+}
+
+/*
+    funzione che simula una prenotazione:
+*/
+
+function submitBooking() {
+    const error = document.getElementById("error");
+    error.innerText = "";
+
+    const nameElement = document.getElementById("name");
+    const surnameElement = document.getElementById("surname");
+    const dateElement = document.getElementById("date");
+    const phoneElement = document.getElementById("phoneNumber");
+    const timeElement = document.getElementById("time");
+    const peopleElement = document.getElementById("people");
+
+    nameElement.classList.remove("error");
+    surnameElement.classList.remove("error");
+    dateElement.classList.remove("error");
+    phoneElement.classList.remove("error");
+    timeElement.classList.remove("error");
+    peopleElement.classList.remove("error");
+
+    const name = nameElement.value.trim().toLowerCase();
+    const surname = surnameElement.value.trim().toLowerCase();
+    const date = dateElement.value.trim();
+    const phone = phoneElement.value.trim();
+    const time = timeElement.value.trim();
+    const people = peopleElement.value.trim();
+
+
+    if (name === "" || surname === "" || phone === "" || date === "" || time === "" || people === "") {
+        error.innerText = "Please fill all the fields";
+        if (name === "") {
+            nameElement.classList.add("error");
+        }
+        if (surname === "") {
+            surnameElement.classList.add("error");
+        }
+        if (date === "") {
+            dateElement.classList.add("error");
+        }
+        if (phone === "") {
+            phoneElement.classList.add("error");
+        }
+        if (time === "") {
+            timeElement.classList.add("error");
+        }
+        if (people === "") {
+            peopleElement.classList.add("error");
+        }
+        return;
+    }
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (!isAfter(date, today)) {
+        error.innerText = "The booking date cannot be in the past.";
+        dateElement.classList.add("error");
+        return;
+    }
+
+    const maxBookingDate = new Date();
+    maxBookingDate.setMonth(maxBookingDate.getMonth() + 6);
+
+    if (isAfter(date, maxBookingDate)) {
+        error.innerText = "The booking date cannot be more than 6 months in the future.";
+        dateElement.classList.add("error");
+        return;
+    }
+
+    const bookingTime = new Date(`1970-01-01T${time}:00`);
+    const openingTime = new Date(`1970-01-01T11:30:00`);
+    const closingTime = new Date(`1970-01-01T15:30:00`);
+    if (bookingTime < openingTime || bookingTime > closingTime) {
+        error.innerText = "The resturant is open from 11:30 am to 3:30 pm .";
+        timeElement.classList.add("error");
+        return;
+    }
+
+    for (let i = 0; i < phone.length; i++) {
+        if (phone[i] < '0' || phone[i] > '9') {
+            error.innerText = "The phone number can only contain numbers.";
+            phoneElement.classList.add("error");
+            return;
+        }
+    }
+
+    if (phone.length !== 10) {
+        error.innerText = "The phone number must be 10 digits long.";
+        phoneElement.classList.add("error");
+        return;
+    }
+
+    if (people < 1) {
+        error.innerText = "The number of people must be at least 1.";
+        peopleElement.classList.add("error");
+        return;
+    }
+
+    if (people > 10) {
+        error.innerText = "The number of people cannot exceed 10.";
+        peopleElement.classList.add("error");
+        return;
+    }
+
+    alert("Booking submitted successfully!");
+    let booking = {
+        name: name,
+        surname: surname,
+        date: date,
+        phone: phone,
+        time: time,
+        people: people
+    }
+    localStorage.setItem("booking", JSON.stringify(booking));
+
+    nameElement.value = "";
+    surnameElement.value = "";
+    dateElement.value = "";
+    phoneElement.value = "";
+    timeElement.value = "";
+    peopleElement.value = "";
+}
+
+function isAfter(date1, date2) {
+    return new Date(date1) > new Date(date2);
 }

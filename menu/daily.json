@@ -1,5 +1,5 @@
 {
-    "1": {
+    "0": {
         "drink": {
             "img_url": "resources/daily/monday_drink.webp",
             "title": "Green Detox Smoothie",
@@ -36,7 +36,7 @@
             "price": 6.49
         }
     },
-    "2": {
+    "1": {
         "drink": {
             "img_url": "resources/daily/tuesday_drink.webp",
             "title": "Berry Blast Smoothie",
@@ -70,7 +70,7 @@
             "price": 5.49
         }
     },
-    "3": {
+    "2": {
         "drink": {
             "img_url": "resources/daily/wednesday_drink.webp",
             "title": "Cucumber Mint Cooler",
@@ -104,7 +104,7 @@
             "price": 4.99
         }
     },
-    "4": {
+    "3": {
         "drink": {
             "img_url": "resources/daily/thursday_drink.webp",
             "title": "Golden Turmeric Latte",
@@ -140,7 +140,7 @@
             "price": 6.49
         }
     },
-    "5": {
+    "4": {
         "drink": {
             "img_url": "resources/daily/friday_drink.webp",
             "title": "Pineapple Coconut Cooler",
@@ -175,7 +175,7 @@
             "price": 5.49
         }
     },
-    "6": {
+    "5": {
         "drink": {
             "img_url": "resources/daily/saturday_drink.webp",
             "title": "Watermelon Lime Refresher",
@@ -209,7 +209,7 @@
             "price": 4.99
         }
     },
-    "7": {
+    "6": {
         "drink": {
             "img_url": "resources/daily/sunday_drink.webp",
             "title": "Orange Ginger Zinger",
