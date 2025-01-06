@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Emily - 2025-01-01",
+        "comment": "The food was delicious, and the staff were very friendly. Will come back!",
+        "rating": 5
+    },
+    {
+        "name": "James - 2025-01-02",
+        "comment": "Great ambiance and tasty dishes, but the drinks could have been better.",
+        "rating": 4
+    },
+    {
+        "name": "Sophia - 2025-01-03",
+        "comment": "A lovely dining experience with excellent service and fresh ingredients.",
+        "rating": 5
+    },
+    {
+        "name": "Michael - 2025-01-04",
+        "comment": "Everything was great, though the dessert menu felt a bit limited.",
+        "rating": 4
+    },
+    {
+        "name": "Olivia - 2025-01-04",
+        "comment": "Exceptional flavors and beautiful presentation! Highly recommend this place.",
+        "rating": 5
+    },
+    {
+        "name": "Daniel - 2025-01-04",
+        "comment": "The staff were attentive, and the food was good, but the lighting was a bit dim.",
+        "rating": 4
+    }
+]

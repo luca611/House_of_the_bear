@@ -7,7 +7,7 @@
     <script src="app.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body onload="showTodaysSpecial()">
+<body onload="showTodaysSpecial();loadAd()">
     <div class="topBar" id="topBar">
         <a class="noDecoration" href="#landing">    
             <div class="logo">
@@ -19,7 +19,7 @@
             <a class="navButton" href="#events">events</a>
             <a class="navButton" href="#menu">menu</a>
             <a href="#findUs" class="navButton">find us</a>
-            <button class="navButton highlighted" onclick="showbooking()">book</button>
+            <button class="navButton highlighted" onclick="showbooking(); loadReviews()">book</button>
         
             <input type="checkbox" id="toggleMenu" class="toggleMenu" hidden>
         
@@ -35,7 +35,7 @@
                 <hr class="mobileNavSeparator">
                 <a class="mobileNavButton" href="#findUs">find us</a>
                 <hr class="mobileNavSeparator">
-                <button class="mobileNavButton highlighted" onclick="showbooking()">book</button>
+                <button class="mobileNavButton highlighted" onclick="showbooking(); loadReviews()">book</button>
             </div>
         </div>
         
@@ -66,7 +66,9 @@
         <div class="section dark" id="events">
             <h2 class="sectionTitle">Events</h2>
             <h3 class="sectionSubtitle">Keep  up with our latest events and offers.</h3>
-            <div class="ad"></div>
+            <div class="ad" id="ad">
+                
+            </div>
             <div class="separation light"></div>
         </div>
         <div class="section removeMinHeight light" id="menu">
@@ -269,7 +271,7 @@
                         <p class="error" id="error"></p>
                         <div class="row">
                             <div class="halfRow">
-                                <button class="submitButton close" onclick="closeBooking()">Close</button>
+                                <button class="submitButton close" onclick="closeBooking()">Cancel</button>
                             </div>
                             <div class="halfRow">
                                 <button class="submitButton" onclick="submitBooking()">Submit</button>
@@ -279,8 +281,7 @@
                 </div>
             </div>
         </div>
-        <div class="bookSection decoration">
-            <img src="resources/imgs/decorationImgs2.webp" alt="decoration" class="bookDecorationImgs"> 
+        <div class="bookSection reviews" id="reviewScroll">
         </div>
     </div>
 </body>

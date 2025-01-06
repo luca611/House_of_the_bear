@@ -1,3 +1,36 @@
+let bookings = [];
+
+function Booking(name, surname, people, date, time, phone) {
+    this.name = name
+    this.surname = surname
+    this.people = people
+    this.date = date
+    this.time = time
+    this.phone = phone
+}
+
+Booking.prototype = {
+    constructor: Booking,
+    getName: function () {
+        return this.name
+    },
+    getSurname: function () {
+        return this.surname
+    },
+    getPeople: function () {
+        return this.people
+    },
+    getDate: function () {
+        return this.date
+    },
+    getTime: function () {
+        return this.time
+    },
+    getPhone: function () {
+        return this.phone
+    }
+}
+
 /*
     funzione per mostrare un piatto del giorno nella pagina principale:
 */
@@ -267,12 +300,12 @@ function submitBooking() {
     timeElement.classList.remove("error");
     peopleElement.classList.remove("error");
 
-    const name = nameElement.value.trim().toLowerCase();
-    const surname = surnameElement.value.trim().toLowerCase();
-    const date = dateElement.value.trim();
-    const phone = phoneElement.value.trim();
-    const time = timeElement.value.trim();
-    const people = peopleElement.value.trim();
+    let name = nameElement.value.trim().toLowerCase();
+    let surname = surnameElement.value.trim().toLowerCase();
+    let date = dateElement.value.trim();
+    let phone = phoneElement.value.trim();
+    let time = timeElement.value.trim();
+    let people = peopleElement.value.trim();
 
 
     if (name === "" || surname === "" || phone === "" || date === "" || time === "" || people === "") {
@@ -317,24 +350,35 @@ function submitBooking() {
     }
 
     const bookingTime = new Date(`1970-01-01T${time}:00`);
-    const openingTime = new Date(`1970-01-01T11:30:00`);
-    const closingTime = new Date(`1970-01-01T15:30:00`);
+    const openingTime = new Date('1970-01-01T11:30:00');
+    const closingTime = new Date('1970-01-01T15:30:00');
+
     if (bookingTime < openingTime || bookingTime > closingTime) {
-        error.innerText = "The resturant is open from 11:30 am to 3:30 pm .";
+        error.innerText = "The restaurant is open from 11:30 am to 3:30 pm.";
         timeElement.classList.add("error");
         return;
     }
 
-    for (let i = 0; i < phone.length; i++) {
-        if (phone[i] < '0' || phone[i] > '9') {
-            error.innerText = "The phone number can only contain numbers.";
-            phoneElement.classList.add("error");
-            return;
-        }
+    const currentDateTime = new Date();
+    const bookingDateTime = new Date(`${date}T${time}:00`);
+
+    if (bookingDateTime < currentDateTime) {
+        error.innerText = "The booking time cannot be in the past.";
+        timeElement.classList.add("error");
+        return;
     }
+
 
     if (phone.length !== 10) {
         error.innerText = "The phone number must be 10 digits long.";
+        phoneElement.classList.add("error");
+        return;
+    }
+
+    phone = Number(phone);
+
+    if (isNaN(phone)) {
+        error.innerText = "The phone number must contain only numbers.";
         phoneElement.classList.add("error");
         return;
     }
@@ -351,16 +395,11 @@ function submitBooking() {
         return;
     }
 
+    let booking = new Booking(name, surname, people, date, time, phone);
+    bookings.push(booking);
+    saveBooking();
+
     alert("Booking submitted successfully!");
-    let booking = {
-        name: name,
-        surname: surname,
-        date: date,
-        phone: phone,
-        time: time,
-        people: people
-    }
-    localStorage.setItem("booking", JSON.stringify(booking));
 
     nameElement.value = "";
     surnameElement.value = "";
@@ -372,4 +411,109 @@ function submitBooking() {
 
 function isAfter(date1, date2) {
     return new Date(date1) > new Date(date2);
+}
+
+function saveBooking() {
+    localStorage.bookings = JSON.stringify(bookings);
+}
+
+function loadReviews() {
+    let xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        try {
+            document.getElementById("reviewScroll").innerHTML = "";
+            const reviews = JSON.parse(xhr.responseText);
+            reviews.forEach(e => {
+                appendReview(e.name, e.comment, e.rating);
+            });
+        } catch (e) {
+            console.log("Errore di parsing");
+        }
+    }
+    xhr.onerror = function () {
+        console.log("Errore di comunicazione");
+    }
+    xhr.open("GET", "reviews/reviews.json");
+    xhr.send();
+}
+
+function appendReview(name, comment, rating) {
+    const cont = document.createElement("div");
+    cont.classList.add("review");
+
+    const commentEl = document.createElement("p");
+    commentEl.innerText = comment;
+    commentEl.classList.add("reviewComment");
+
+    const ratingCont = document.createElement("div");
+    ratingCont.classList.add("rating");
+
+    for (let i = 0; i < rating; i++) {
+        const star = document.createElement("img");
+        star.src = "resources/icons/star.svg";
+        star.classList.add("star");
+        ratingCont.appendChild(star);
+    }
+
+    const nameEl = document.createElement("p");
+    nameEl.innerText = name;
+    nameEl.classList.add("reviewName");
+
+    cont.appendChild(commentEl);
+    cont.appendChild(ratingCont);
+    cont.appendChild(nameEl);
+    document.getElementById("reviewScroll").appendChild(cont);
+}
+
+function loadAd() {
+    console.log("loadAd");
+    let xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        try {
+            const ad = JSON.parse(xhr.responseText);
+            const adContainer = document.getElementById("ad");
+
+            const img = document.createElement("img");
+            img.src = ad.bg_url;
+            img.classList.add("eventBg");
+
+            const content = document.createElement("div");
+            content.classList.add("eventContent");
+
+            const name = document.createElement("h3");
+            name.innerText = ad.name;
+            name.classList.add("eventName");
+
+            const separator1 = document.createElement("hr");
+            separator1.classList.add("eventSeparator");
+
+            const description = document.createElement("p");
+            description.innerText = ad.description;
+            description.classList.add("eventDescription");
+
+            const separator2 = document.createElement("hr");
+            separator2.classList.add("eventSeparator");
+
+            const date = document.createElement("p");
+            date.innerText = ad.ending_date;
+            date.classList.add("eventDate");
+
+            content.appendChild(name);
+            content.appendChild(separator1);
+            content.appendChild(description);
+            content.appendChild(separator2);
+            content.appendChild(date);
+
+            adContainer.appendChild(img);
+            adContainer.appendChild(content);
+
+        } catch (e) {
+            console.log("Errore di parsing");
+        }
+    }
+    xhr.onerror = function () {
+        console.log("Errore di comunicazione");
+    }
+    xhr.open("GET", "events/events.json");
+    xhr.send();
 }

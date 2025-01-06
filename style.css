@@ -130,6 +130,9 @@ div.topBar {
     filter: brightness(0.8);
 }
 
+
+
+
 h1.logoText {
     font-family: var(--heading-font);
     font-size: 1rem;
@@ -351,7 +354,66 @@ div.ad {
     position: relative;
     z-index: 3;
     min-height: 20rem;
+    box-shadow: var(--hevy-shadow);
 }
+
+img.eventBg {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    position: absolute;
+    object-fit: cover;
+}
+
+div.eventContent {
+    border-radius: var(--div-border-radius);
+    padding: 4rem;
+    max-width: 70%;
+    min-height: 50vh;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    background: url("resources/imgs/lightTexture.webp") center var(--bg-color-light);
+    background-size: cover;
+    justify-content: center;
+    text-align: center;
+}
+
+h3.eventName {
+    font-family: var(--heading-font);
+    font-size: 3rem;
+    color: var(--primary-text-color-light);
+    margin: 0;
+    padding: 0;
+}
+
+hr.eventSeparator {
+    width: 100%;
+    border: solid 0.1rem var(--bg-color-dark);
+    margin: 0;
+    opacity: 0.3;
+}
+
+p.eventDescription {
+    font-family: var(--subtitle-font);
+    font-size: 1.2rem;
+    color: var(--secondary-text-color-light);
+}
+
+p.eventDate {
+    font-family: var(--heading-font);
+    font-size: 1rem;
+    color: var(--secondary-text-color-light);
+}
+
+p.eventDate::before {
+    content: "Until : ";
+}
+
 
 .mobile {
     display: none;
@@ -890,6 +952,47 @@ div.bookSection {
     min-height: 40rem;
 }
 
+div.bookSection.reviews {
+    flex-direction: row;
+    gap: 1rem;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 2rem
+}
+
+div.review {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    background: var(--bg-color-dark);
+    border-radius: var(--div-border-radius);
+    box-shadow: var(--light-shadow);
+    max-width: 100%;
+    height: 100%;
+    padding: 2rem;
+    justify-content: center;
+}
+
+p.reviewComment {
+    font-family: var(--subtitle-font);
+    font-size: 1.2rem;
+    color: var(--primary-text-color-light);
+    margin: 0;
+    padding: 0;
+}
+
+p.reviewName {
+    font-family: serif;
+    font-size: 1.2rem;
+    color: var(--primary-text-color-light);
+    font-style: italic;
+}
+
 div.formContainer {
     overflow: hidden;
     overflow-y: auto;
@@ -1058,7 +1161,7 @@ img.bookDecorationImgs {
         font-size: 1rem;
     }
 
-    div.bookSection.decoration {
+    div.bookSection.reviews {
         display: none;
     }
 
@@ -1231,6 +1334,28 @@ img.bookDecorationImgs {
 
     div.footerSection {
         width: 100%;
+    }
+
+    div.ad {
+        padding: 1.5rem;
+    }
+
+    div.eventContent {
+        min-width: 100%;
+        overflow: auto;
+        padding: 1rem;
+    }
+
+    p.eventDate {
+        font-size: 1rem;
+    }
+
+    p.eventDescription {
+        font-size: 1rem;
+    }
+
+    h3.eventName {
+        font-size: 1.5rem;
     }
 }
 
