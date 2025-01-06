@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body onload="showTodaysSpecial();loadAd()">
+
+    <!-- top bar -->
     <div class="topBar" id="topBar">
         <a class="noDecoration" href="#landing">    
             <div class="logo">
@@ -16,6 +18,7 @@
             </div>
         </a>
         <div class="links"">
+            <!-- desktop buttons-->
             <a class="navButton" href="#events">events</a>
             <a class="navButton" href="#menu">menu</a>
             <a href="#findUs" class="navButton">find us</a>
@@ -27,7 +30,7 @@
                 ☰
             </label>
         
-            <!-- The mobile navigation menu -->
+            <!-- mobile buttons -->
             <div class="mobileNav">
                 <a class="mobileNavButton" href="#events">events</a>
                 <hr class="mobileNavSeparator">
@@ -41,6 +44,7 @@
         
     </div>
 
+    <!-- landing section -->
     <div class="main" id="main">
         <div class="landingSection light" id="landing">
             <div class="innerDarker">
@@ -66,22 +70,29 @@
         <div class="section dark" id="events">
             <h2 class="sectionTitle">Events</h2>
             <h3 class="sectionSubtitle">Keep  up with our latest events and offers.</h3>
+            
+            <!-- section where ad is loaded based on the json -->
             <div class="ad" id="ad">
                 
             </div>
             <div class="separation light"></div>
         </div>
+
+        <!-- menu section -->
         <div class="section removeMinHeight light" id="menu">
             <h2 class="sectionTitle">Menu</h2>
             <h3 class="sectionSubtitle">Enjoy the taste of sustainable food </h3>
+
             <div class="menuWrap">
+                <!-- daily menu section -->
                 <div class="menuSection">
                     <div class="dailyMenu">
                         <h4 class="dailyMenuTitle">Today's Specials</h4>
                         <img src="resources/imgs/waiter1.webp" alt="dailyMenu" class="dailyMenuImg" id="dailyMenuImg">
                         <button class="dailyMenuButton" onclick="loadDailyMenu()">View the full menu</button>
                     </div>
-                </div>
+                </div>            
+                <!-- individual menu sections buttons -->
                 <div class="menuSection">
                     <div class="menuSubsection">
                         <div class="menuItem">
@@ -115,6 +126,8 @@
             </div>
             <div class="separation dark"></div>
         </div>
+
+        <!-- find us section -->
         <div class="section dark removeMinHeight" id="findUs"> 
             <h2 class="sectionTitle">Where to find us</h2>
             <h3 class="sectionSubtitle">Visit us at our restaurant in the heart of the forest.</h3>
@@ -136,6 +149,8 @@
             </div>
             <div class="separation light"></div>
         </div>
+
+        <!-- chef and crew section-->
         <div class="section light" ID="chef">
             <h2 class="sectionTitle">Meet the chef</h2>
             <h3 class="sectionSubtitle">Years of experience and a passion for the wild.</h3>
@@ -160,6 +175,8 @@
             </div>
             <div class="separation dark"></div>
         </div>
+
+        <!-- footer -->
         <div class="footer">
             <div class = "footerSection sx">
                 <h3 class="footerTitle">Contact or find us</h3>
@@ -183,11 +200,15 @@
             </div>
         </div>
     </div>
+
+    <!-- menu page -->
     <div class="menu hidden" id="menuPage">
         <div class="menuTitle">
             <h1 class="menuTitleText" id="menuTitle">Menu</h1>
         </div>
         <button class="closeButton" onclick="closeMenu()">X</button>
+
+        <!-- allergenes infos -->
         <button class="infoButton">?</button>
         <div class="menuInfos">
             <div class="textWithIcon">
@@ -207,31 +228,20 @@
                 <p class="text">Corn</p>
             </div>
         </div>
+
+        <!-- menu body -->
         <div class="menuBody">
             <div class="topDecoration"></div>
+            <!-- div where the dishes are generated based on the jsons -->
             <div class="dishScroll" id="dishScroll">
-                <div class="dish">
-                    <img src="resources/imgs/waiter1.webp" alt="dish" class="dishImage">
-                    <div class="dishInfo">
-                        <h3 class="dishTitle">Dish Title</h3>
-                        <p class="dishDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                            Nullam auctor, nunc nec
-                            fermentum
-                        </p>
-                        <div class="allergens">
-                            <img src="resources/icons/corn.svg" alt="corn" class="allergen">
-                            <img src="resources/icons/gluten.svg" alt="gluten" class="allergen">
-                            <img src="resources/icons/soy.svg" alt="soy" class="allergen">
-                            <img src="resources/icons/nuts.svg" alt="nuts" class="allergen">
-                        </div>
-                        <p class="dishPrice">€ 10.00</p>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
 
+    <!-- booking page -->
     <div class="book hidden" id="bookPage">
+        <!-- booking form -->
         <div class="bookSection">
             <div class="formContainer">
                 <div class="row">
@@ -281,6 +291,7 @@
                 </div>
             </div>
         </div>
+        <!-- section where reviews are generated based on the json -->
         <div class="bookSection reviews" id="reviewScroll">
         </div>
     </div>
