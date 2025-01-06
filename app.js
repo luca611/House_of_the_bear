@@ -1,5 +1,16 @@
 let bookings = [];
 
+/*
+    classe prenotazione:
+
+    name: nome del cliente
+    surname: cognome del cliente
+    people: numero di persone
+    date: data della prenotazione
+    time: orario della prenotazione
+    phone: numero di telefono del cliente
+*/
+
 function Booking(name, surname, people, date, time, phone) {
     this.name = name
     this.surname = surname
@@ -53,14 +64,15 @@ function showTodaysSpecial() {
     xhr.send();
 }
 
+/*
+    funczione che nasconde la pagina principale e mostra la pagina del menu:
+*/
 function swapToMenu() {
     document.getElementById("topBar").classList.add("hidden");
     document.getElementById("main").classList.add("hidden");
     document.getElementById("menuPage").classList.remove("hidden");
     document.getElementById("dishScroll").innerHTML = "";
 }
-
-var currentMenu = 0;
 
 /*
     funzione che si occupa di appendere un piatto alla pagina del menu:
@@ -279,7 +291,7 @@ function closeBooking() {
 }
 
 /*
-    funzione che simula una prenotazione:
+    funzione che simula una prenotazione con tutti i possibli controlli che mi veniano in mente:
 */
 
 function submitBooking() {
@@ -331,6 +343,8 @@ function submitBooking() {
         return;
     }
 
+    // controllo che la data sia valida ossia non prima di oggi, non oltre 6 mesi e che sia un giorno in cui il ristorante è aperto
+
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
@@ -369,6 +383,8 @@ function submitBooking() {
     }
 
 
+    // controllo che il numero di telefono sia un numero e che il numero di cifre sia corretto
+
     if (phone.length !== 10) {
         error.innerText = "The phone number must be 10 digits long.";
         phoneElement.classList.add("error");
@@ -383,6 +399,15 @@ function submitBooking() {
         return;
     }
 
+    // controllo che il numero di persone sia un numero e che il valore sia valido
+    people = Number(people);
+
+    if (isNaN(people)) {
+        error.innerText = "The number of people must be a number.";
+        peopleElement.classList.add("error");
+        return;
+    }
+
     if (people < 1) {
         error.innerText = "The number of people must be at least 1.";
         peopleElement.classList.add("error");
@@ -394,6 +419,8 @@ function submitBooking() {
         peopleElement.classList.add("error");
         return;
     }
+
+    // se tutto è andato bene creo la prenotazione e la salvo
 
     let booking = new Booking(name, surname, people, date, time, phone);
     bookings.push(booking);
@@ -413,10 +440,16 @@ function isAfter(date1, date2) {
     return new Date(date1) > new Date(date2);
 }
 
+/*
+    funzione che salva le prenotazioni sul local storage:
+*/
 function saveBooking() {
     localStorage.bookings = JSON.stringify(bookings);
 }
 
+/*
+    funzione per caricare le recensioni:
+*/
 function loadReviews() {
     let xhr = new XMLHttpRequest();
     xhr.onload = function () {
@@ -437,6 +470,9 @@ function loadReviews() {
     xhr.send();
 }
 
+/*
+    funzione che si occupa di mostrare una recensione sulla pagina:
+*/
 function appendReview(name, comment, rating) {
     const cont = document.createElement("div");
     cont.classList.add("review");
@@ -465,6 +501,9 @@ function appendReview(name, comment, rating) {
     document.getElementById("reviewScroll").appendChild(cont);
 }
 
+/*
+    funzione che carica l'evento dal file JSON:
+*/
 function loadAd() {
     console.log("loadAd");
     let xhr = new XMLHttpRequest();
