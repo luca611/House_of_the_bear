@@ -9,6 +9,7 @@
     --primary-text-color-light: #F9F5E8;
     --secondary-text-color-light: #FFF0D1;
     --input-color: #FFFAEF;
+    --text-highlight-color: #9b84514b;
 
     --danger-color: rgb(184, 73, 73);
 
@@ -45,6 +46,16 @@ body {
     margin: 0;
     padding: 0;
     margin-top: 4rem;
+    background: linear-gradient(var(--bg-color-light), var(--bg-color-dark));
+}
+
+::-moz-selection {
+    color: var(--primary-text-color-light);
+    background: var(--text-highlight-color);
+}
+::selection {
+    color: var(--primary-text-color-light);
+    background: var(--text-highlight-color);
 }
 
 .hidden {
@@ -116,7 +127,6 @@ div.topBar {
     transition: all 0.3s;
 }
 
-
 .navButton:hover {
     color: var(--secondary-text-color-light);
     background: var(--trasparent-grey);
@@ -129,9 +139,6 @@ div.topBar {
 .highlighted:hover {
     filter: brightness(0.8);
 }
-
-
-
 
 h1.logoText {
     font-family: var(--heading-font);
@@ -257,7 +264,6 @@ img.bush {
     width: 10vw;
     z-index: 2;
 }
-
 
 div.separation {
     width: 100%;
@@ -402,6 +408,7 @@ p.eventDescription {
     font-family: var(--subtitle-font);
     font-size: 1.2rem;
     color: var(--secondary-text-color-light);
+    text-align: left;
 }
 
 p.eventDate {
@@ -558,8 +565,9 @@ div.map {
 iframe.mapFrame {
     width: 100%;
     height: 100%;
-    border: none;
     min-height: 20rem;
+    border: solid 0.4rem var(--bg-color-light);
+    border-radius: var(--div-border-radius);
 }
 
 img.icon {
