@@ -53,6 +53,7 @@ body {
     color: var(--primary-text-color-light);
     background: var(--text-highlight-color);
 }
+
 ::selection {
     color: var(--primary-text-color-light);
     background: var(--text-highlight-color);
@@ -1367,7 +1368,7 @@ img.bookDecorationImgs {
     }
 }
 
-@media screen and (max-height: 55rem) {
+@media screen and (max-height: 50rem) {
 
     img.bear {
         width: 50vw;
