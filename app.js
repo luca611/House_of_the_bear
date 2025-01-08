@@ -509,7 +509,16 @@ function loadAd() {
     let xhr = new XMLHttpRequest();
     xhr.onload = function () {
         try {
-            const ad = JSON.parse(xhr.responseText);
+            const adList = Object.entries(JSON.parse(xhr.responseText));
+            console.log(adList);
+            let ad;
+            adList.forEach(e => {
+                console.log(e);
+                let oggi = new Date();
+                if (typeof ad === 'undefined' || isAfter(new Date(e[1].ending_date), oggi) && isAfter(new Date(ad.ending_date), e[1].ending_date)) {
+                    ad = e[1];
+                }
+            });
             const adContainer = document.getElementById("ad");
 
             const img = document.createElement("img");
