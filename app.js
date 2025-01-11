@@ -363,18 +363,17 @@ function submitBooking() {
         return;
     }
 
-    const bookingTime = new Date(`1970-01-01T${time}:00`);
-    const openingTime = new Date('1970-01-01T11:30:00');
-    const closingTime = new Date('1970-01-01T15:30:00');
-
-    if (bookingTime < openingTime || bookingTime > closingTime) {
+    const timeParts = time.split(':');
+    const hours = parseInt(timeParts[0], 10);
+    const minutes = parseInt(timeParts[1], 10);
+    if (hours < 11 || (hours === 11 && minutes < 30) || hours > 15 || (hours === 15 && minutes > 30)) {
         error.innerText = "The restaurant is open from 11:30 am to 3:30 pm.";
         timeElement.classList.add("error");
         return;
     }
 
     const currentDateTime = new Date();
-    const bookingDateTime = new Date(`${date}T${time}:00`);
+    const bookingDateTime = new Date(date + 'T' + time + ':00');
 
     if (bookingDateTime < currentDateTime) {
         error.innerText = "The booking time cannot be in the past.";
