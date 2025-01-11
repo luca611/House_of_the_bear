@@ -60,7 +60,7 @@ function showTodaysSpecial() {
     xhr.onerror = function () {
         console.log("Errore di comunicazione");
     }
-    xhr.open("GET", "menu/daily.json");
+    xhr.open("GET", "menu/daily.json" + "?n" + Math.random());
     xhr.send();
 }
 
@@ -159,7 +159,7 @@ function loadDailyMenu() {
     xhr.onerror = function () {
         console.log("Errore di comunicazione");
     }
-    xhr.open("GET", "menu/daily.json");
+    xhr.open("GET", "menu/daily.json" + "?n" + Math.random());
     xhr.send();
 }
 
@@ -259,7 +259,7 @@ function loadChefSpecials() {
     xhr.onerror = function () {
         console.log("Errore di comunicazione");
     }
-    xhr.open("GET", "menu/specials.json");
+    xhr.open("GET", "menu/specials.json" + "?n" + Math.random());
     xhr.send();
 }
 
@@ -466,7 +466,7 @@ function loadReviews() {
     xhr.onerror = function () {
         console.log("Errore di comunicazione");
     }
-    xhr.open("GET", "reviews/reviews.json");
+    xhr.open("GET", "reviews/reviews.json" + "?n" + Math.random());
     xhr.send();
 }
 
@@ -562,6 +562,6 @@ function loadAd() {
     xhr.onerror = function () {
         console.log("Errore di comunicazione");
     }
-    xhr.open("GET", "events/events.json");
+    xhr.open("GET", "events/events.json" + "?n" + Math.random());
     xhr.send();
 }
