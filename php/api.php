@@ -246,9 +246,12 @@
                         $occupato = FALSE;
                         $firstBefore = null;
                         $firstAfter = null;
-                        while($row = $res->fetch_assoc()){
+
+                        while ($row = $res->fetch_assoc()) {
                             $reservationDateTimeDB = new DateTime($row["dataora"]);
-                            if ($reservationDateTimeDB < $reservationDateTimeDB) {
+
+                            #prendo la data piu' vicina prima di quella voluta e quella piu' vicina dopo
+                            if ($reservationDateTimeDB < $reservationDateTime) { 
                                 if ($firstBefore === null || $reservationDateTimeDB > $firstBefore) {
                                     $firstBefore = $reservationDateTimeDB;
                                 }
@@ -258,23 +261,30 @@
                                 }
                             }
                         }
-                        
-                        if($firstBefore !== null) {
+
+                        # se è presente una prenotazione ed è entro un'ora prima il tavolo è considerato occupato
+                        if ($firstBefore !== null) {
                             $diffBefore = $firstBefore->diff($reservationDateTime);
-                            if ($diffBefore->h < 1) {
+                            $minutesBefore = $diffBefore->days * 24 * 60 + $diffBefore->h * 60 + $diffBefore->i;
+
+                            if ($minutesBefore < 60) {
                                 $occupato = TRUE;
                             }
                         }
 
-                        if($firstAfter !== null) {
-                            $diff = $reservationDateTime->diff($firstAfter);
-                            if ($diff->h < 1) {
+                        # se è presente una prenotazione ed è entro un'ora dopo il tavolo è considerato occupato
+                        if ($firstAfter !== null) {
+                            $diffAfter = $reservationDateTime->diff($firstAfter);
+                            $minutesAfter = $diffAfter->days * 24 * 60 + $diffAfter->h * 60 + $diffAfter->i;
+
+                            if ($minutesAfter < 60) {
                                 $occupato = TRUE;
                             }
                         }
                         
+                        # se il tavolo è occupato, non posso prenotare
                         if($occupato === TRUE){
-                            $ret=["error"=>1, "message"=>"tavolo già occupato", "firstBefore"=>$firstBefore, "firstAfter"=>$firstAfter, "reservationDateTime"=>$reservationDateTime,"diffBefore"=>$diffBefore, "diff"=>$diff];
+                            $ret=["error"=>1, "message"=>"tavolo già occupato"];
                             break;
                         }
                     }catch(Exception $ex){
