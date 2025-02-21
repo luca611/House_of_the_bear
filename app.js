@@ -279,6 +279,43 @@ function showbooking() {
     document.getElementById("topBar").classList.add("hidden");
     document.getElementById("main").classList.add("hidden");
     document.getElementById("bookPage").classList.remove("hidden");
+
+    isLogged(function(isLogged) {
+        if (isLogged) {
+            console.log("logged");
+            document.getElementById("booking").classList.remove("hidden");
+            document.getElementById("login").classList.add("hidden");
+        } else {
+            console.log("not logged");
+            document.getElementById("booking").classList.add("hidden");
+            document.getElementById("login").classList.remove("hidden");
+        }
+    });
+}
+
+/*
+    funzione per verificare che sia loggato
+*/
+function isLogged(action) {
+    let xhr = new XMLHttpRequest();
+
+    xhr.onload = function () {
+        let response = JSON.parse(xhr.responseText);
+        console.log(response.error);
+        if (response.error == "0") {
+            action(true);
+        } else {
+            action(false);
+        }
+    }
+
+    xhr.onerror = function () {
+        console.log("Errore di comunicazione");
+        action(false);
+    }
+
+    xhr.open("GET", "./php/api.php?op=isLogged");
+    xhr.send();
 }
 
 /*

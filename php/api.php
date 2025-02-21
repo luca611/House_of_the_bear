@@ -8,7 +8,7 @@
         $_SESSION["isAdmin"] = FALSE;
     }
     if(!isset($_GET["op"])){
-        $ret=["error"=>1];
+        $ret=["error"=>1, "message"=>"sintassi errata"];
     }else{
         try{
             $conn=new mysqli($db_hostname, $db_username, $db_password, $db_name);
@@ -36,6 +36,13 @@
                     $email = trim($_POST["email"]);
 
                     $password = trim($_POST["password"]);
+                    
+                    # controllo sulla sicurezza della password
+                    if(strlen($password) < 8){
+                        $ret=["error"=>1, "message"=>"password troppo corta, minimo 8 caratteri"];
+                        break;
+                    }
+
                     $password = hash("sha256", preg_replace('/\s+/u', '', $password));
 
                     $cellulare = trim($_POST["cellulare"]);
@@ -151,6 +158,41 @@
                             # se è un admin, visualizza tutte le prenotazioni future
                             $q=$conn->prepare("select * from prenotazioni where dataora >= CURRENT_DATE() and dataora <= ? order by dataora");
                             $q->bind_param("s", $untilDate);
+                        }
+                        
+                        $q->execute();
+                        $res = $q->get_result();
+                        $prenotazioni = [];
+                        while($row = $res->fetch_assoc()){
+                            $prenotazioni[] = $row;
+                        }
+                        $ret=["error"=>0, "prenotazioni"=>$prenotazioni];
+                    }
+                    catch(Exception $ex){
+                        $ret=["error"=>1 , "message"=>"errore interno"];
+                    }
+                }break;
+
+                # API per la visualizzazione delle ordinazioni passate
+                # risposta: error = 0 se l'operazione è avvenuta con successo con array delle prenotazioni, error=1 altrimenti con un messaggio di errore
+                case "getStorico":{
+                    # controllo se l'utente è loggato
+                    if(!isset($_SESSION["email"]) || $_SESSION["email"] == ""){
+                        $ret=["error"=>1, "message"=>"login richiesto"];
+                        break;
+                    }
+
+                    $email = $_SESSION["email"];
+
+                    # ricerca delle prenotazioni passate dell'utente
+                    try{
+                        # se è un utente normale, visualizza solo le sue prenotazioni passate
+                        if($_SESSION["isAdmin"] === FALSE){
+                            $q=$conn->prepare("select * from prenotazioni where idUtente=? and dataora <  NOW() order by dataora desc");
+                            $q->bind_param("s", $email);
+                        }else{
+                            # se è un admin, visualizza tutte le prenotazioni passate
+                            $q=$conn->prepare("select * from prenotazioni where dataora < NOW() order by dataora desc");
                         }
                         
                         $q->execute();
@@ -355,6 +397,32 @@
                     }
                 }break;
 
+                # ---------------- Gestione tavoli ----------------
+                
+                # API per la visualizzazione dei tavoli
+                # risposta: error = 0 se l'operazione è avvenuta con successo con array dei tavoli, error=1 altrimenti con un messaggio di errore
+                case "getTavoli":{
+                    # controllo se l'utente è loggato
+                    if(!isset($_SESSION["email"]) || $_SESSION["email"] == ""){
+                        $ret=["error"=>1, "message"=>"login richiesto"];
+                        break;
+                    }
+
+                    # ricerca dei tavoli nel ristorante
+                    try{
+                        $q=$conn->prepare("select * from tavoli");
+                        $q->execute();
+                        $res = $q->get_result();
+                        $tavoli = [];
+                        while($row = $res->fetch_assoc()){
+                            $tavoli[] = $row;
+                        }
+                        $ret=["error"=>0, "tavoli"=>$tavoli];
+                    }
+                    catch(Exception $ex){
+                        $ret=["error"=>1 , "message"=>"errore interno"];
+                    }
+                }break;
 
                 # ---------------- altro  ----------------
 

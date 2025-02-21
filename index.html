@@ -68,6 +68,8 @@
             <img src="resources/imgs/peakingBear.webp" alt="bear" class="bear notSelectable">
             <div class="separation dark"></div>
         </div>
+
+        <!-- events section -->
         <div class="section dark" id="events">
             <h2 class="sectionTitle">Events</h2>
             <h3 class="sectionSubtitle">Keep  up with our latest events and offers.</h3>
@@ -242,59 +244,118 @@
 
     <!-- booking page -->
     <div class="book hidden" id="bookPage">
-        <!-- booking form -->
-        <div class="bookSection">
-            <div class="formContainer">
-                <div class="row">
-                    <div class="halfRow">
-                        <p class="fieldLabel">Name</p>
-                        <input type="text" class="input" id="name">
+        <!-- Page if logged -->
+        <div class="reservationSubsection hidden" id="booking">
+            <!-- booking form -->
+            <div class="bookSection">
+                <div class="formContainer">
+                    <div class="row">
+                        <div class="halfRow">
+                            <p class="fieldLabel">Name</p>
+                            <input type="text" class="input" id="name">
+                        </div>
+                        <div class="halfRow">
+                            <p class="fieldLabel">Last name</p>
+                            <input type="text" class="input" id="surname">
+                        </div>
                     </div>
-                    <div class="halfRow">
-                        <p class="fieldLabel">Last name</p>
-                        <input type="text" class="input" id="surname">
+                    <div class="row">
+                        <div class="fullRow">
+                            <p class="fieldLabel">How many people?</p>
+                            <input type="number" class="input" id="people" min="1" max="12">
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="fullRow">
-                        <p class="fieldLabel">How many people?</p>
-                        <input type="number" class="input" id="people" min="1" max="12">
+                    <div class="row">
+                        <div class="halfRow">
+                            <p class="fieldLabel">Date</p>
+                            <input type="date" class="input" id="date">
+                        </div>
+                        <div class="halfRow">
+                            <p class="fieldLabel">Time</p>
+                            <input type="time" class="input" id="time">
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="halfRow">
-                        <p class="fieldLabel">Date</p>
-                        <input type="date" class="input" id="date">
+                    <div class="row">
+                        <div class="fullRow">
+                            <p class="fieldLabel">Phone number</p>
+                            <input class="input" type="tel" id="phoneNumber"></input>
+                        </div>
                     </div>
-                    <div class="halfRow">
-                        <p class="fieldLabel">Time</p>
-                        <input type="time" class="input" id="time">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="fullRow">
-                        <p class="fieldLabel">Phone number</p>
-                        <input class="input" type="tel" id="phoneNumber"></input>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="fullRow">
-                        <p class="error" id="error"></p>
-                        <div class="row">
-                            <div class="halfRow">
-                                <button class="submitButton close" onclick="closeBooking()">Cancel</button>
-                            </div>
-                            <div class="halfRow">
-                                <button class="submitButton" onclick="submitBooking()">Submit</button>
+                    <div class="row">
+                        <div class="fullRow">
+                            <p class="error" id="error"></p>
+                            <div class="row">
+                                <div class="halfRow">
+                                    <button class="submitButton close" onclick="closeBooking()">Cancel</button>
+                                </div>
+                                <div class="halfRow">
+                                    <button class="submitButton" onclick="submitBooking()">Submit</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- section where reviews are generated based on the json -->
+            <div class="bookSection reviews" id="reviewScroll">
+            </div>
         </div>
-        <!-- section where reviews are generated based on the json -->
-        <div class="bookSection reviews" id="reviewScroll">
+
+        <!-- Page if not logged -->
+        <div class="reservationSubsection" id="login">
+            <div class="registrationForm">
+                
+                
+                <!-- login form -->
+                <div class="innerform" id="loginForm">
+                    <div class="row alignCenter">
+                        <h1 class="formTitle">Login</h1>
+                    </div>
+                    <hr class="formSeparator">
+                    <div class="row">
+                        <div class="fullRow">
+                            <p class="fieldLabel">Email</p>
+                            <input type="email" class="input" id="loginEmail">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="fullRow">
+                            <p class="fieldLabel">Password</p>
+                            <input type="password" class="input" id="loginPassword">
+                        </div>
+                    </div>
+                    <button class="formConfirmButton" onclick="login()">Login</button>
+                </div>
+
+                <!-- register form -->
+                <div class="innerform hidden" id="registerForm">
+                    <div class="row alignCenter">
+                        <h1 class="formTitle">Register</h1>
+                    </div>
+                    <hr class="formSeparator">
+                    <div class="row">
+                        <div class="fullRow">
+                            <p class="fieldLabel">email</p>
+                            <input type="email" class="input" id="registerEmail">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="fullRow">
+                            <p class="fieldLabel">Password</p>
+                            <input type="password" class="input" id="registerPassword">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="fullRow">
+                            <p class="fieldLabel">Confirm password</p>
+                            <input type="password" class="input" id="confirmPassword">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
+
     </div>
 </body>
 </html>
