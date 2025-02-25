@@ -312,47 +312,106 @@
                         <h1 class="formTitle">Login</h1>
                     </div>
                     <hr class="formSeparator">
-                    <div class="row">
-                        <div class="fullRow">
-                            <p class="fieldLabel">Email</p>
-                            <input type="email" class="input" id="loginEmail">
+                    <div class="wrapper">
+                        <div class="row">
+                            <div class="fullRow">
+                                <p class="fieldLabel">Email</p>
+                                <input type="email" class="input" id="loginEmail">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="fullRow">
+                                <p class="fieldLabel">Password</p>
+                                <input type="password" class="input" id="loginPassword">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="fullRow">
+                                <p class="error" id="loginError"></p>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="fullRow">
-                            <p class="fieldLabel">Password</p>
-                            <input type="password" class="input" id="loginPassword">
-                        </div>
-                    </div>
+                    <a class="link" onclick="toggleForm()">Don't have an account?</a>
                     <button class="formConfirmButton" onclick="login()">Login</button>
                 </div>
 
                 <!-- register form -->
                 <div class="innerform hidden" id="registerForm">
-                    <div class="row alignCenter">
-                        <h1 class="formTitle">Register</h1>
-                    </div>
-                    <hr class="formSeparator">
-                    <div class="row">
-                        <div class="fullRow">
-                            <p class="fieldLabel">email</p>
-                            <input type="email" class="input" id="registerEmail">
+                    <div class="wrapper">
+                        <div class="row alignCenter">
+                            <h1 class="formTitle">Register</h1>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="fullRow">
-                            <p class="fieldLabel">Password</p>
-                            <input type="password" class="input" id="registerPassword">
+                        <hr class="formSeparator">
+                        <div class="row">
+                            <div class="fullRow">
+                                <p class="fieldLabel">Email</p>
+                                <input type="email" class="input" id="registerEmail">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="fullRow">
-                            <p class="fieldLabel">Confirm password</p>
-                            <input type="password" class="input" id="confirmPassword">
+                        <div class="row">
+                            <div class="fullRow">
+                                <p class="fieldLabel">Password</p>
+                                <input type="password" class="input" id="registerPassword">
+                            </div>
                         </div>
-                    </div>
-                </div>
+                        <div class="row">
+                            <div class="fullRow">
+                                <p class="fieldLabel">Confirm password</p>
+                                <input type="password" class="input" id="confirmPassword">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="fullRow">
+                                <p class="error" id="registerError"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="fullRow">
+                                <p class="fieldLabel">Phone number</p>
+                                <div class="phoneNumberContainer">
+                                    <div class="phoneNumberPrefixContainer">
+                                        <select
+                                            class="prefixSelector"
+                                            id="country-code"
+                                        >
+                                            <option selected="" value="1" data-countrycode="US">🇺🇸 +1</option>
+                                            <option value="44" data-countrycode="GB">🇬🇧 +44</option>
+                                            <option value="1" data-countrycode="CA">🇨🇦 +1</option>
+                                            <option value="61" data-countrycode="AU">🇦🇺 +61</option>
+                                            <option value="91" data-countrycode="IN">🇮🇳 +91</option>
+                                            <option value="49" data-countrycode="DE">🇩🇪 +49</option>
+                                            <option value="33" data-countrycode="FR">🇫🇷 +33</option>
+                                            <option value="81" data-countrycode="JP">🇯🇵 +81</option>
+                                            <option value="55" data-countrycode="BR">🇧🇷 +55</option>
+                                            <option value="27" data-countrycode="ZA">🇿🇦 +27</option>
+                                            <option value="86" data-countrycode="CN">🇨🇳 +86</option>
+                                            <option value="52" data-countrycode="MX">🇲🇽 +52</option>
+                                            <option value="39" data-countrycode="IT">🇮🇹 +39</option>
+                                            <option value="34" data-countrycode="ES">🇪🇸 +34</option>
+                                            <option value="82" data-countrycode="KR">🇰🇷 +82</option>
+                                            <option value="7" data-countrycode="RU">🇷🇺 +7</option>
+                                            <option value="54" data-countrycode="AR">🇦🇷 +54</option>
+                                            <option value="966" data-countrycode="SA">🇸🇦 +966</option>
+                                            <option value="234" data-countrycode="NG">🇳🇬 +234</option>
+                                            <option value="46" data-countrycode="SE">🇸🇪 +46</option>
+                                        </select>
 
+                                    </div>
+                                    <input
+                                    class="w-full px-3 py-2 border border-gray-600 bg-gray-900 text-gray-300 rounded-r-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    placeholder="Phone number"
+                                    name="phone"
+                                    id="phone"
+                                    type="tel"
+                                    />
+                                </div>
+                                </div>
+
+                            </div>
+                    </div>
+                    <a class="link" onclick="toggleForm()">Already have an account?</a>
+                    <button class="formConfirmButton" onclick="register()">Register</button>
+                </div>
             </div>
         </div>
 

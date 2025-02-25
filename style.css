@@ -1025,6 +1025,27 @@ h1.formTitle{
     margin: 0;
 }
 
+div.innerform{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+a.link{
+    margin-top: auto;
+    margin-bottom: 0.3rem;
+    color: var(--secondary-text-color-light);
+    font-family: var(--subtitle-font);
+    font-size: 1rem;
+    text-decoration: underline;
+    cursor: pointer;
+    transform: all 0.3s;
+}
+
+a.link:hover{
+    filter: brightness(0.9);
+}
+
 div.bookSection {
     display: flex;
     flex-direction: row;
@@ -1124,6 +1145,22 @@ p.fieldLabel {
     padding: 0;
 }
 
+div.wrapper{
+    overflow: auto;
+    padding-bottom: 0.3rem;
+}
+
+div.phoneNumberContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+div.phoneNumberPrefixContainer{
+    display: flex;
+    width: 40%;
+    height: 100%;
+}
+
 input.input {
     width: 100%;
     height: 80%;
@@ -1187,8 +1224,12 @@ button.formConfirmButton {
     border-radius: var(--button-border-radius);
     padding: 1rem;
     font-size: 1rem;
-    align-self: flex-end;
-    margin-top: auto;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+button.formConfirmButton:hover {
+    filter: brightness(0.8);
 }
 
 div.registrationForm{

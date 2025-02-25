@@ -293,6 +293,11 @@ function showbooking() {
     });
 }
 
+function toggleForm(){
+    document.getElementById("loginForm").classList.toggle("hidden");
+    document.getElementById("registerForm").classList.toggle("hidden");
+}
+
 /*
     funzione per verificare che sia loggato
 */
@@ -600,4 +605,43 @@ function loadAd() {
     }
     xhr.open("GET", "events/events.json" + "?n" + Math.random());
     xhr.send();
+}
+
+
+//--------------------------Funczioni API-------------------------------
+
+function login() {
+    let email = document.getElementById("loginEmail").value;
+    let password = document.getElementById("loginPassword").value;
+
+    let xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        let response = JSON.parse(xhr.responseText);
+        if (response.error == "0") {
+            goToReservation();
+        } else {
+            console.log(response.message);
+        }
+    }
+
+    xhr.onerror = function () {
+        console.log("Errore di comunicazione");
+    }
+
+    xhr.open("POST", "./php/api.php?op=login");
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("email=" + email + "&password=" + password);
+}
+
+
+function register() {
+    let email = document.getElementById("registerEmail").value;
+    let password = document.getElementById("registerPassword").value;
+    let confirmPassword = document.getElementById("registerConfirmPassword").value;
+}
+
+//-------------------------- altre funzioni nuove -----------------------
+
+function goToReservation(){
+
 }
