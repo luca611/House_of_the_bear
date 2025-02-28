@@ -316,13 +316,13 @@
                         <div class="row">
                             <div class="fullRow">
                                 <p class="fieldLabel">Email</p>
-                                <input type="email" class="input" id="loginEmail">
+                                <input type="email" class="input" id="loginEmail" placeholder="my@email.com">
                             </div>
                         </div>
                         <div class="row">
                             <div class="fullRow">
                                 <p class="fieldLabel">Password</p>
-                                <input type="password" class="input" id="loginPassword">
+                                <input type="password" class="input" id="loginPassword" placeholder="******">
                             </div>
                         </div>
                         <div class="row">
@@ -345,24 +345,19 @@
                         <div class="row">
                             <div class="fullRow">
                                 <p class="fieldLabel">Email</p>
-                                <input type="email" class="input" id="registerEmail">
+                                <input type="email" class="input" id="registerEmail" placeholder="my@email.com">
                             </div>
                         </div>
                         <div class="row">
                             <div class="fullRow">
                                 <p class="fieldLabel">Password</p>
-                                <input type="password" class="input" id="registerPassword">
+                                <input type="password" class="input" id="registerPassword" placeholder="******">
                             </div>
                         </div>
                         <div class="row">
                             <div class="fullRow">
                                 <p class="fieldLabel">Confirm password</p>
-                                <input type="password" class="input" id="confirmPassword">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="fullRow">
-                                <p class="error" id="registerError"></p>
+                                <input type="password" class="input" id="confirmPassword" placeholder="******">
                             </div>
                         </div>
                         <div class="row">
@@ -372,7 +367,7 @@
                                     <div class="phoneNumberPrefixContainer">
                                         <select
                                             class="prefixSelector"
-                                            id="country-code"
+                                            id="registerPrefix"
                                         >
                                             <option selected="" value="1" data-countrycode="US">🇺🇸 +1</option>
                                             <option value="44" data-countrycode="GB">🇬🇧 +44</option>
@@ -397,17 +392,16 @@
                                         </select>
 
                                     </div>
-                                    <input
-                                    class="w-full px-3 py-2 border border-gray-600 bg-gray-900 text-gray-300 rounded-r-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    placeholder="Phone number"
-                                    name="phone"
-                                    id="phone"
-                                    type="tel"
-                                    />
+                                    <input class="pgoneNumberInput" placeholder="Phone number" id="phone" type="tel" pattern="[0-9]{10}"/>
                                 </div>
                                 </div>
 
+                        </div>
+                        <div class="row">
+                            <div class="fullRow">
+                                <p class="error" id="registerError"></p>
                             </div>
+                        </div>
                     </div>
                     <a class="link" onclick="toggleForm()">Already have an account?</a>
                     <button class="formConfirmButton" onclick="register()">Register</button>
@@ -415,6 +409,91 @@
             </div>
         </div>
 
+    </div>
+
+    <!-- dashboard -->
+    <div class="dashboard hidden" id="dashboard">
+        <div class="dashboardPage" id="adminDashboard">
+            <div class="filters">
+                <h1 class="divsectionTitle">Filters</h1>
+                <hr class="sectionSeparator">
+                <div class="filter">
+                    <div class="titleContainer">
+                        <label for="filterDateCheckbox" class="filterName">Date</p>
+                        <input type="checkbox" class="filterCheckbox" id="filterDateCheckbox">
+                    </div>
+                    <input type="date" class="filterInput" id="filterDate">
+                </div>
+                <hr class="sectionSeparator">
+                <div class="filter">
+                    <div class="titleContainer">
+                        <label for="filterEmailCheckbox" class="filterName">Email</p>
+                        <input type="checkbox" class="filterCheckbox" id="filterEmailCheckbox">
+                    </div>
+                    <input type="text" class="filterInput" id="filterEmail" placeholder="Email">
+                </div>
+                <hr class="sectionSeparator">
+                <div class="filter">
+                    <div class="titleContainer">
+                        <label for="filterPhoneCheckbox" class="filterName">Table</p>
+                        <input type="checkbox" class="filterCheckbox" id="filterPhoneCheckbox">
+                    </div>
+                    <input type="number" class="filterInput" id="filterTable" placeholder="2">
+                </div>
+                <hr class="sectionSeparator">
+                <h2 class="divsectionSubtitle">Range</h2>
+                <div class="buttonsArray">
+                    <button onclick="oneDayFilter()" class="arrayButton">today</button>
+                    <button onclick="oneWeekFilter()" class="arrayButton">this week</button>
+                    <button onclick="oneMonthFilter()" class="arrayButton">this month</button>
+                </div>
+            </div>
+            <div class="reservationSection">
+                <div class="tableHeader">
+                    <p class="email">Email</p>
+                    <p class="table">Table</p>
+                    <p class="date">Date</p>
+                    <p class="note">Notes</p>
+                </div>
+                <div class="reservationPlaceholder ">
+                    <img class="placeholder" src="resources/imgs/notFoundIcon.svg" alt="not found">
+                    <p class="placeholderText">No reservations found</p>
+                </div>
+                <div class="reservationList hidden" id="reservationList">
+                    <div class="reservation">
+                        <p class="email">email@email.com</p>
+                        <p class="table">2</p>
+                        <p class="date">2021-06-01 12:30:22</p>
+                        <p class="note">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio aspernatur nam, at velit voluptatibus tempora rerum alias possimus eius veritatis harum nihil incidunt magnam eos excepturi a repellat sapiente perspiciatis!</p>
+                    </div>
+                    <div class="reservation">
+                        <p class="email">email@email.com</p>
+                        <p class="table">2</p>
+                        <p class="date">2021-06-01 12:30:22</p>
+                        <p class="note">Lorem, is!</p>
+                    </div>
+                    <div class="reservation">
+                        <p class="email">email@email.com</p>
+                        <p class="table">2</p>
+                        <p class="date">2021-06-01 12:30:22</p>
+                        <p class="note">Lorem, is!</p>
+                    </div>
+                    <div class="reservation">
+                        <p class="email">email@email.com</p>
+                        <p class="table">2</p>
+                        <p class="date">2021-06-01 12:30:22</p>
+                        <p class="note">Lorem, is!</p>
+                    </div>
+                    <div class="reservation">
+                        <p class="email">email@email.com</p>
+                        <p class="table">2</p>
+                        <p class="date">2021-06-01 12:30:22</p>
+                        <p class="note">Lorem, is!</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

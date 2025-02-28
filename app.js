@@ -276,21 +276,41 @@ function closeMenu() {
     funzione per mostrare la pagina di prenotazione:
 */
 function showbooking() {
-    document.getElementById("topBar").classList.add("hidden");
-    document.getElementById("main").classList.add("hidden");
-    document.getElementById("bookPage").classList.remove("hidden");
+    let xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        try {
+            const response = JSON.parse(xhr.responseText);
+            if (response.error == "0") {
+                showDashboard();
+            }
+            else{
+                document.getElementById("topBar").classList.add("hidden");
+                document.getElementById("main").classList.add("hidden");
+                document.getElementById("bookPage").classList.remove("hidden");
 
-    isLogged(function(isLogged) {
-        if (isLogged) {
-            console.log("logged");
-            document.getElementById("booking").classList.remove("hidden");
-            document.getElementById("login").classList.add("hidden");
-        } else {
-            console.log("not logged");
-            document.getElementById("booking").classList.add("hidden");
-            document.getElementById("login").classList.remove("hidden");
+                isLogged(function(isLogged) {
+                    if (isLogged) {
+                        console.log("logged");
+                        document.getElementById("booking").classList.remove("hidden");
+                        document.getElementById("login").classList.add("hidden");
+                    } else {
+                        console.log("not logged");
+                        document.getElementById("booking").classList.add("hidden");
+                        document.getElementById("login").classList.remove("hidden");
+                    }
+                });
+            }
+        } catch (e) {
+            console.log("Errore di parsing");
         }
-    });
+    }
+
+    xhr.onerror = function () {
+        console.log("Errore di comunicazione");
+    }
+
+    xhr.open("GET", "./php/api.php?op=isAdmin");
+    xhr.send();
 }
 
 function toggleForm(){
@@ -608,7 +628,7 @@ function loadAd() {
 }
 
 
-//--------------------------Funczioni API-------------------------------
+//--------------------------Funzioni API e nuove-------------------------------
 
 function login() {
     let email = document.getElementById("loginEmail").value;
@@ -618,9 +638,9 @@ function login() {
     xhr.onload = function () {
         let response = JSON.parse(xhr.responseText);
         if (response.error == "0") {
-            goToReservation();
+            redirectUser();
         } else {
-            console.log(response.message);
+            document.getElementById("loginError").innerText = "Email o password errati";
         }
     }
 
@@ -635,13 +655,76 @@ function login() {
 
 
 function register() {
-    let email = document.getElementById("registerEmail").value;
-    let password = document.getElementById("registerPassword").value;
-    let confirmPassword = document.getElementById("registerConfirmPassword").value;
+    let email = document.getElementById("registerEmail").value.trim();
+    let password = document.getElementById("registerPassword").value.trim();
+    let confirmPassword = document.getElementById("confirmPassword").value.trim();
+
+    let prefix = document.getElementById("registerPrefix").value;
+    let phoneNumber = document.getElementById("phone").value.trim();
+    
+    if (password !== confirmPassword) {
+        document.getElementById("registerError").innerText = "Passwords do not match";
+        return;
+    }
+
+    if (!/^\d{10}$/.test(phoneNumber)) {
+        document.getElementById("registerError").innerText = "Invalid phone number";
+        return;
+    }
+
+    let xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        let response = JSON.parse(xhr.responseText);
+        if (response.error == "0") {
+            redirectUser();
+        } else {
+            document.getElementById("registerError").innerText = response.message;
+        }
+    }
+
+    xhr.onerror = function () {
+        console.log("Errore di comunicazione");
+    }
+
+    xhr.open("POST", "./php/api.php?op=registrazione");
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("email=" + email + "&password=" + password + "&cellulare=" + prefix + phoneNumber);
 }
 
-//-------------------------- altre funzioni nuove -----------------------
 
-function goToReservation(){
+/*
+    funzione per mostrare la dashboard se admin o la pagina di prenotazione se utente normale:
+*/
+function redirectUser(){
+    let xhr = new XMLHttpRequest();
 
+    xhr.onload = function () {
+        let response = JSON.parse(xhr.responseText);
+        if (response.error == "0") {
+            console.log("admin");
+            showDashboard();
+        } else {
+            console.log("user");
+            showbooking();
+        }
+    }
+
+    xhr.onerror = function () {
+        console.log("Errore di comunicazione");
+    }
+
+    xhr.open("GET", "./php/api.php?op=isAdmin");
+    xhr.send();
+}
+
+function showDashboard(){
+    document.getElementById("bookPage").classList.add("hidden");
+    document.getElementById("topBar").classList.add("hidden");
+    document.getElementById("main").classList.add("hidden");
+    document.getElementById("dashboard").classList.remove("hidden");
+    loadBookings();
+}
+
+function loadBookings(){
+    console.log("loadBookings");
 }

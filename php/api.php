@@ -119,6 +119,16 @@
                     }
                 }break;
 
+                # API per verificare che l'utente sia un admin
+                # risposta: error = 0 se l'utente è un admin, error=1 altrimenti
+                case "isAdmin": {
+                    if(isset($_SESSION["isAdmin"]) && $_SESSION["isAdmin"] === TRUE){
+                        $ret=["error"=>0];
+                    }else{
+                        $ret=["error"=>1, "message"=>"non admin"];
+                    }
+                }break;
+
                 # API per il logout (elimina la sessione)
                 case "logout":{
                     session_unset();
