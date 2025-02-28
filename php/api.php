@@ -218,6 +218,51 @@
                     }
                 }break;
 
+                # API per ottenere i dettagli di una prenotazione
+                # parametri: id
+                # risposta: error = 0 se l'operazione è avvenuta con successo con i dettagli della prenotazione, error=1 altrimenti con un messaggio di errore
+                case "getAllInformazioni":{
+                    # controllo se l'utente è loggato
+                    if(!isset($_SESSION["email"]) || $_SESSION["email"] == ""){
+                        $ret=["error"=>1, "message"=>"login richiesto"];
+                        break;
+                    }
+
+                    $email = $_SESSION["email"];
+
+                    # controllo parametri
+                    if(!isset($_GET["id"])){
+                        $ret=["error"=>1, "message"=>"parametri mancanti"];
+                        break;
+                    }
+
+                    $id = $_GET["id"];
+
+                    # ricerca delle informazioni della prenotazione
+                    try{
+                        # se è un utente normale, visualizza solo le sue prenotazioni
+                        if($_SESSION["isAdmin"] === FALSE){
+                            $q=$conn->prepare("SELECT email, cellulare, idTavolo, dataora, numPersone as nPersone, note FROM prenotazioni JOIN utenti ON email = idUtente WHERE id = ? and idUtente = ?;");
+                            $q->bind_param("ss", $id, $email);
+                        }else{
+                            # se è un admin, visualizza tutte le prenotazioni
+                            $q=$conn->prepare("SELECT email, cellulare, idTavolo, dataora, numPersone as nPersone, note FROM prenotazioni JOIN utenti ON email = idUtente WHERE id = ?");
+                            $q->bind_param("s", $id);
+                        }
+                        
+                        $q->execute();
+                        $res = $q->get_result();
+                        if($res->num_rows == 0){
+                            $ret=["error"=>1, "message"=>"non trovato"];
+                        }else{
+                            $ret=["error"=>0, "prenotazione"=>$res->fetch_assoc()];
+                        }
+                    }
+                    catch(Exception $ex){
+                        $ret=["error"=>1 , "message"=>"errore interno"];
+                    }
+                }break;
+
                 # API per la creazione di una nuova prenotazione
                 # parametri: dataora, numPersone, tavolo, note
                 # risposta: error = 0 se l'operazione è avvenuta con successo, error=1 altrimenti con un messaggio di errore
@@ -245,7 +290,7 @@
                     $reservationDateTime = new DateTime($dataora);
 
                     # controllo se la data/ora è valida (non passata)
-                    if ($reservationDateTime < $currentDateTime) {
+                    if ($reservationDateTime < $currentDateTime && $_SESSION["isAdmin"] === FALSE) {
                         $ret=["error"=>1, "message"=>"data non valida"];
                         break;
                     }
@@ -255,7 +300,7 @@
                     $reservationMinute = (int)$reservationDateTime->format('i');
 
                     if (($reservationHour < 11 || ($reservationHour == 11 && $reservationMinute < 30)) || 
-                        ($reservationHour > 15 || ($reservationHour == 15 && $reservationMinute > 30))) {
+                        ($reservationHour > 15 || ($reservationHour == 15 && $reservationMinute > 30)) && $_SESSION["isAdmin"] === FALSE) {
                         $ret=["error"=>1, "message"=>"orario non valido"];
                         break;
                     }

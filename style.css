@@ -5,7 +5,7 @@
     --dish-background-color: #413131;
     --bg-color-light: #5F3F3F;
     --bg-color-medium: #4A3333;
-    --bg-color-quite-dark:rgb(68, 55, 55)0;
+    --bg-color-quite-dark: rgb(68, 55, 55)0;
     --bg-color-dark: #3B3030;
     --trasparent-grey: rgba(0, 0, 0, 0.5);
     --primary-text-color-light: #F9F5E8;
@@ -25,6 +25,7 @@
     --subtitle-font: 'Baloo', sans-serif;
     --button-font: 'Baloo', sans-serif;
 }
+
 /*------------------------------------------*/
 
 /*Stile generale della pagina*/
@@ -70,6 +71,26 @@ div.main {
     overflow-x: hidden;
     height: calc(100vh - 4rem);
     scroll-behavior: smooth;
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+    width: 0.6rem;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-color-dark);
+    border-radius: var(--div-border-radius);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--bg-color-light);
+    border-radius: var(--div-border-radius);
+    border: 3px solid var(--bg-color-dark);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--bg-color-medium);
 }
 
 /*------------------------------------------*/
@@ -314,6 +335,7 @@ h3.footerTitle {
     margin: 0;
     padding: 0;
 }
+
 h3.dishTitle {
     font-family: var(--heading-font);
     font-size: 2rem;
@@ -983,6 +1005,7 @@ div.menuInfos {
     transition: all 0.3s;
     box-shadow: var(--light-shadow);
 }
+
 /* componenti dashboard */
 
 div.dashboard {
@@ -994,14 +1017,14 @@ div.dashboard {
     flex-direction: row;
 }
 
-div.dashboardPage{
+div.dashboardPage {
     width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: row;
 }
 
-div.filters{
+div.filters {
     text-align: left;
     padding: 1rem;
     display: flex;
@@ -1018,7 +1041,7 @@ div.filters{
     overflow-y: auto;
 }
 
-div.filter{
+div.filter {
     display: block;
     width: 100%;
     font-family: var(--subtitle-font);
@@ -1032,15 +1055,17 @@ input.filterCheckbox {
     margin-right: 0.1rem;
 }
 
-div.buttonsArray{
+div.buttonsArray {
     display: flex;
     flex-direction: row;
     gap: 1rem;
     margin-top: 1rem;
     width: 100%;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
 }
 
-button.arrayButton{
+button.arrayButton {
     background-color: var(--bg-color-light);
     border: none;
     padding: 0.5rem;
@@ -1048,35 +1073,41 @@ button.arrayButton{
     font-family: var(--button-font);
     border-radius: var(--button-border-radius);
     width: 100%;
+    width: calc(50% - 0.5rem);
     cursor: pointer;
-    transition: all 0.3s;
+    flex-shrink: 0;
+    border: solid 0.2rem var(--bg-color-light);
 }
 
-button.arrayButton:hover{
+button.arrayButton.selected {
+    border: solid 0.2rem var(--secondary-text-color-light) !important;
+}
+
+button.arrayButton:hover {
     filter: brightness(0.8);
 }
 
-div.titleContainer{
+div.titleContainer {
     width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
 
-label.filterName{
+label.filterName {
     display: inline-flex;
     flex-wrap: nowrap;
     width: 100%;
     height: 2rem;
 }
 
-p.filterName{
+p.filterName {
     margin: 0.2rem;
     margin-left: 0;
     text-transform: capitalize;
 }
 
-input.filterInput{
+input.filterInput {
     width: 100%;
     height: 4rem;
     border: solid 0.4rem var(--bg-color-light);
@@ -1088,7 +1119,7 @@ input.filterInput{
     font-family: var(--button-font);
 }
 
-div.reservationSection{
+div.reservationSection {
     padding: 1rem;
     display: flex;
     flex-direction: column;
@@ -1098,7 +1129,7 @@ div.reservationSection{
     border-bottom-left-radius: var(--div-border-radius);
 }
 
-h1.divsectionTitle{
+h1.divsectionTitle {
     font-family: var(--heading-font);
     font-size: 2rem;
     color: var(--primary-text-color-light);
@@ -1106,7 +1137,7 @@ h1.divsectionTitle{
     text-align: center;
 }
 
-h2.divsectionSubtitle{
+h2.divsectionSubtitle {
     font-family: var(--heading-font);
     font-size: 1.5rem;
     color: var(--primary-text-color-light);
@@ -1124,7 +1155,7 @@ hr.sectionSeparator {
     max-width: 30rem;
 }
 
-div.reservationPlaceholder{
+div.reservationPlaceholder {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1133,11 +1164,11 @@ div.reservationPlaceholder{
     height: 100%;
 }
 
-img.placeholder{
+img.placeholder {
     max-width: 20rem;
 }
 
-p.placeholderText{
+p.placeholderText {
     font-family: var(--subtitle-font);
     font-size: 1.5rem;
     color: var(--primary-text-color-light);
@@ -1156,11 +1187,11 @@ div.reservationList {
     gap: 1rem;
 }
 
-div.reservationList > div:nth-child(odd) {
+div.reservationList>div:nth-child(odd) {
     background: var(--bg-color-quite-dark) !important;
 }
 
-div.reservation{
+div.reservation {
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -1174,13 +1205,13 @@ div.reservation{
     font-family: var(--subtitle-font);
 }
 
-div.reservation p{
+div.reservation p {
     height: 100%;
     display: flex;
     align-items: center;
 }
 
-div.tableHeader{
+div.tableHeader {
     display: flex;
     flex-direction: row;
     gap: 1rem;
@@ -1198,26 +1229,143 @@ div.tableHeader{
 
 }
 
-p.email{
+button.backButton {
+    margin-top: auto;
+    width: 100%;
+    font-size: 1.3rem;
+    font-family: var(--subtitle-font);
+    background: var(--danger-color);
+    border: none;
+    border-radius: var(--button-border-radius);
+    color: var(--primary-text-color-light);
+    padding: 0.5rem;
+    transition: all 0.3s;
+}
+
+button.backButton:hover {
+    cursor: pointer;
+    filter: brightness(0.8);
+}
+
+p.email {
+    text-wrap: wrap;
     width: 20%;
     border-right: solid 0.1rem var(--bg-color-light);
     padding-right: 1rem;
+    min-width: 15rem;
 }
 
-p.table{
+p.table {
+    text-wrap: wrap;
     width: 10%;
     border-right: solid 0.1rem var(--bg-color-light);
     padding-right: 1rem;
+    min-width: 6rem;
+    text-align: center;
+    justify-content: center;
 }
 
-p.date{
+p.date {
+    text-wrap: wrap;
     width: 20%;
     border-right: solid 0.1rem var(--bg-color-light);
     padding-right: 1rem;
+    min-width: 7rem;
 }
 
-p.note{
-    width: 50%;
+p.note {
+    word-wrap: break-word;
+    min-width: 3rem;
+}
+
+p.people {
+    text-wrap: wrap;
+    width: 10%;
+    border-right: solid 0.1rem var(--bg-color-light);
+    padding-right: 1rem;
+    min-width: 7rem;
+    text-align: center;
+    justify-content: center;
+}
+
+.mobilefilter {
+    display: none;
+    transition: all 0.3s;
+}
+
+div.popUp {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-color-light);
+    border: solid 0.2rem var(--bg-color-dark);
+    border-bottom: none;
+    border-radius: 2rem;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    display: flex;
+    z-index: 11;
+    transition: bottom 0.3s;
+    height: 70vh;
+    width: 60vw;
+    padding: 2rem;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+div.popUp.closed {
+    bottom: -70vh;
+}
+
+div.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.274);
+    z-index: 10;
+}
+
+@media screen and (max-width : 70rem) {
+    div.filters {
+        display: none;
+    }
+
+    div.reservationSection {
+        overflow-x: auto;
+        margin-left: 0.5rem;
+    }
+
+    div.tableHeader {
+        width: min-content;
+    }
+
+    div.reservation {
+        width: min-content;
+    }
+
+    div.reservationList {
+        min-width: min-content;
+    }
+
+    input.mobilefilter:checked+label+div.filters {
+        display: flex;
+    }
+
+    p.note {
+        min-width: 15rem;
+    }
+
+    .mobilefilter {
+        display: block !important;
+        text-align: center;
+    }
+
+    div.popUp {
+        width: 100vw;
+    }
 }
 
 /*------------------------------------------*/
@@ -1235,13 +1383,13 @@ div.book {
 }
 
 
-div.reservationSubsection{
+div.reservationSubsection {
     display: flex;
     height: 100vh;
     width: 100vw;
 }
 
-div.alignCenter{
+div.alignCenter {
     justify-content: center;
 }
 
@@ -1255,7 +1403,7 @@ hr.formSeparator {
     max-width: 30rem;
 }
 
-h1.formTitle{
+h1.formTitle {
     font-family: var(--heading-font);
     font-size: 3rem;
     color: var(--primary-text-color-light);
@@ -1263,13 +1411,13 @@ h1.formTitle{
     margin: 0;
 }
 
-div.innerform{
+div.innerform {
     display: flex;
     flex-direction: column;
     height: 100%;
 }
 
-a.link{
+a.link {
     margin-top: auto;
     margin-bottom: 0.3rem;
     color: var(--secondary-text-color-light);
@@ -1280,7 +1428,7 @@ a.link{
     transform: all 0.3s;
 }
 
-a.link:hover{
+a.link:hover {
     filter: brightness(0.9);
 }
 
@@ -1383,24 +1531,24 @@ p.fieldLabel {
     padding: 0;
 }
 
-div.wrapper{
+div.wrapper {
     overflow: auto;
     padding-bottom: 0.3rem;
 }
 
-div.phoneNumberContainer{
+div.phoneNumberContainer {
     display: flex;
     height: 4rem;
     flex-direction: row;
 }
 
-div.phoneNumberPrefixContainer{
+div.phoneNumberPrefixContainer {
     display: flex;
     width: 50%;
     height: 100%;
 }
 
-select.prefixSelector{
+select.prefixSelector {
     width: 100%;
     height: 100%;
     background-color: var(--input-color);
@@ -1425,7 +1573,7 @@ input.input {
     font-family: var(--button-font);
 }
 
-input.pgoneNumberInput{
+input.pgoneNumberInput {
     width: 100%;
     height: 100%;
     border: none;
@@ -1499,7 +1647,7 @@ button.formConfirmButton:hover {
     filter: brightness(0.8);
 }
 
-div.registrationForm{
+div.registrationForm {
     height: 90vh;
     display: flex;
     width: 50vw;
@@ -1578,7 +1726,7 @@ div.registrationForm{
 
 @media screen and (max-width: 45rem) {
 
-    div.registrationForm{
+    div.registrationForm {
         width: 90vw;
     }
 
@@ -1742,7 +1890,7 @@ div.registrationForm{
         font-size: 1.5rem;
     }
 
-    input[type="checkbox"]:checked+label+div.mobileNav {
+    input[type="checkbox"].mobileNavbarButton:checked+label+div.mobileNav {
         display: flex;
     }
 

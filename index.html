@@ -25,9 +25,9 @@
             <a href="#findUs" class="navButton">find us</a>
             <button class="navButton highlighted" onclick="showbooking(); loadReviews()">book</button>
         
-            <input type="checkbox" id="toggleMenu" class="toggleMenu" hidden>
+            <input type="checkbox" id="toggleMenu" class="toggleMenu mobileNavbarButton" hidden>
         
-            <label for="toggleMenu" class="navButton mobile highlighted">
+            <label for="toggleMenu" class="navButton mobile highlighted mobileNavbarButton">
                 ☰
             </label>
         
@@ -414,85 +414,90 @@
     <!-- dashboard -->
     <div class="dashboard hidden" id="dashboard">
         <div class="dashboardPage" id="adminDashboard">
+            <input type="checkbox" id="toggleFilterMenu" class="toggleMenu mobilefilter" hidden style="display:none !important;">
+        
+            <label for="toggleFilterMenu" class="navButton mobilefilter highlighted mobileNavbarButton">
+                ☰
+            </label>
             <div class="filters">
                 <h1 class="divsectionTitle">Filters</h1>
                 <hr class="sectionSeparator">
                 <div class="filter">
                     <div class="titleContainer">
-                        <label for="filterDateCheckbox" class="filterName">Date</p>
-                        <input type="checkbox" class="filterCheckbox" id="filterDateCheckbox">
-                    </div>
-                    <input type="date" class="filterInput" id="filterDate">
-                </div>
-                <hr class="sectionSeparator">
-                <div class="filter">
-                    <div class="titleContainer">
                         <label for="filterEmailCheckbox" class="filterName">Email</p>
-                        <input type="checkbox" class="filterCheckbox" id="filterEmailCheckbox">
+                        <input type="checkbox" class="filterCheckbox" id="filterEmailCheckbox" onchange="showFilteredBookings()">
                     </div>
-                    <input type="text" class="filterInput" id="filterEmail" placeholder="Email">
+                    <input type="text" class="filterInput" id="filterEmail" placeholder="Email" onkeyup="showFilteredBookings()">
                 </div>
                 <hr class="sectionSeparator">
                 <div class="filter">
                     <div class="titleContainer">
-                        <label for="filterPhoneCheckbox" class="filterName">Table</p>
-                        <input type="checkbox" class="filterCheckbox" id="filterPhoneCheckbox">
+                        <label for="filtertableCheckbox" class="filterName">Table</p>
+                        <input type="checkbox" class="filterCheckbox" id="filtertableCheckbox" onchange="showFilteredBookings()">
                     </div>
-                    <input type="number" class="filterInput" id="filterTable" placeholder="2">
+                    <input type="number" class="filterInput" id="filterTable" placeholder="2" onkeyup="showFilteredBookings()">
                 </div>
                 <hr class="sectionSeparator">
                 <h2 class="divsectionSubtitle">Range</h2>
                 <div class="buttonsArray">
-                    <button onclick="oneDayFilter()" class="arrayButton">today</button>
-                    <button onclick="oneWeekFilter()" class="arrayButton">this week</button>
-                    <button onclick="oneMonthFilter()" class="arrayButton">this month</button>
+                    <button id="pastFilter" onclick="timeFilter(0)" class="arrayButton">past</button>
+                    <button id="todayfilter" onclick="timeFilter(1)" class="arrayButton selected">today</button>
+                    <button id="weekfilter"onclick="timeFilter(2)" class="arrayButton">this week</button>
+                    <button id="monthfilter" onclick="timeFilter(3)" class="arrayButton">this month</button>
                 </div>
+                <button class="backButton" onclick="closeDashboard()">Back</button>
             </div>
             <div class="reservationSection">
+                
                 <div class="tableHeader">
                     <p class="email">Email</p>
                     <p class="table">Table</p>
+                    <p class="people">People</p>
                     <p class="date">Date</p>
                     <p class="note">Notes</p>
                 </div>
-                <div class="reservationPlaceholder ">
+                <div class="reservationPlaceholder" id="reservationPlaceholder">
                     <img class="placeholder" src="resources/imgs/notFoundIcon.svg" alt="not found">
                     <p class="placeholderText">No reservations found</p>
                 </div>
                 <div class="reservationList hidden" id="reservationList">
-                    <div class="reservation">
-                        <p class="email">email@email.com</p>
-                        <p class="table">2</p>
-                        <p class="date">2021-06-01 12:30:22</p>
-                        <p class="note">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio aspernatur nam, at velit voluptatibus tempora rerum alias possimus eius veritatis harum nihil incidunt magnam eos excepturi a repellat sapiente perspiciatis!</p>
-                    </div>
-                    <div class="reservation">
-                        <p class="email">email@email.com</p>
-                        <p class="table">2</p>
-                        <p class="date">2021-06-01 12:30:22</p>
-                        <p class="note">Lorem, is!</p>
-                    </div>
-                    <div class="reservation">
-                        <p class="email">email@email.com</p>
-                        <p class="table">2</p>
-                        <p class="date">2021-06-01 12:30:22</p>
-                        <p class="note">Lorem, is!</p>
-                    </div>
-                    <div class="reservation">
-                        <p class="email">email@email.com</p>
-                        <p class="table">2</p>
-                        <p class="date">2021-06-01 12:30:22</p>
-                        <p class="note">Lorem, is!</p>
-                    </div>
-                    <div class="reservation">
-                        <p class="email">email@email.com</p>
-                        <p class="table">2</p>
-                        <p class="date">2021-06-01 12:30:22</p>
-                        <p class="note">Lorem, is!</p>
-                    </div>
-                    
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="overlay hidden" id="overlay" onclick="closePopup()"></div>
+    <div class="popUp closed" id="popUp">
+        <div class="popUpContent" id="popUpContent">
+            <div class="textWithIcon">
+                <img src="resources/icons/mail.svg" alt="check" class="icon">
+                <p class="text" id="popUpemail">text</p>
+            </div>
+            <div class="textWithIcon">
+                <img src="resources/icons/phone.svg" alt="check" class="icon">
+                <p class="text" id="popUpphone">text</p>
+            </div>
+            <div class="textWithIcon">
+                <img src="resources/icons/table.svg" alt="check" class="icon">
+                <p class="text" id="popUptable">text</p>
+            </div>
+            <div class="textWithIcon">
+                <img src="resources/icons/people.svg" alt="check" class="icon">
+                <p class="text" id="popUppeople">text</p>
+            </div>
+            <div class="textWithIcon">
+                <img src="resources/icons/time.svg" alt="check" class="icon">
+                <p class="text" id="popUpdate">text</p>
+            </div>
+            <div class="textWithIcon">
+                <img src="resources/icons/note.svg" alt="check" class="icon">
+                <p class="text" id="popUpnote">text</p>
+            </div>
+        </div>
+        <div class="popUpButtons">
+            <button class="popUpButton" onclick="deleteBooking()">Delete</button>
+            <button class="popUpButton" onclick="closePopUp()">Close</button>
+            <button class="popUpButton" id="emailButton"><img src="resources/icons/mail.svg" class="icon"></button>
         </div>
     </div>
 </body>

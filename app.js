@@ -283,12 +283,12 @@ function showbooking() {
             if (response.error == "0") {
                 showDashboard();
             }
-            else{
+            else {
                 document.getElementById("topBar").classList.add("hidden");
                 document.getElementById("main").classList.add("hidden");
                 document.getElementById("bookPage").classList.remove("hidden");
 
-                isLogged(function(isLogged) {
+                isLogged(function (isLogged) {
                     if (isLogged) {
                         console.log("logged");
                         document.getElementById("booking").classList.remove("hidden");
@@ -313,7 +313,7 @@ function showbooking() {
     xhr.send();
 }
 
-function toggleForm(){
+function toggleForm() {
     document.getElementById("loginForm").classList.toggle("hidden");
     document.getElementById("registerForm").classList.toggle("hidden");
 }
@@ -661,7 +661,7 @@ function register() {
 
     let prefix = document.getElementById("registerPrefix").value;
     let phoneNumber = document.getElementById("phone").value.trim();
-    
+
     if (password !== confirmPassword) {
         document.getElementById("registerError").innerText = "Passwords do not match";
         return;
@@ -695,7 +695,7 @@ function register() {
 /*
     funzione per mostrare la dashboard se admin o la pagina di prenotazione se utente normale:
 */
-function redirectUser(){
+function redirectUser() {
     let xhr = new XMLHttpRequest();
 
     xhr.onload = function () {
@@ -717,7 +717,7 @@ function redirectUser(){
     xhr.send();
 }
 
-function showDashboard(){
+function showDashboard() {
     document.getElementById("bookPage").classList.add("hidden");
     document.getElementById("topBar").classList.add("hidden");
     document.getElementById("main").classList.add("hidden");
@@ -725,6 +725,189 @@ function showDashboard(){
     loadBookings();
 }
 
-function loadBookings(){
-    console.log("loadBookings");
+/* 
+    0: passato
+    1: oggi
+    2: settimana
+    3: mese
+*/
+let rangeFilter = 1;
+let loadedBookings = [];
+
+function loadBookings() {
+    document.getElementById("reservationList").innerHTML = "";
+    let xhr = new XMLHttpRequest();
+
+    xhr.onload = function () {
+        let response = JSON.parse(xhr.responseText);
+        if (response.error == "1" || response.prenotazioni.length == 0) {
+            document.getElementById("reservationPlaceholder").classList.remove("hidden");
+            document.getElementById("reservationList").classList.add("hidden");
+            return;
+        }
+        document.getElementById("reservationPlaceholder").classList.add("hidden");
+        document.getElementById("reservationList").classList.remove("hidden");
+
+        loadedBookings = response.prenotazioni;
+        showFilteredBookings(loadedBookings);
+    }
+
+    xhr.onerror = function () {
+        console.log("Errore di comunicazione");
+    }
+
+    let url = "./php/api.php?op=";
+    switch (rangeFilter) {
+        case 0:
+            url += "getStorico";
+            break;
+        case 1:
+            url += "getPrenotazioni&untilDate=" + new Date(new Date().setHours(24, 0, 0, 0)).toISOString();
+            break;
+        case 2:
+            url += "getPrenotazioni&untilDate=" + new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString();
+            break;
+        case 3:
+            let endOfMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0);
+            endOfMonth.setHours(23, 59, 59, 999);
+            url += "getPrenotazioni&untilDate=" + endOfMonth.toISOString();
+            break;
+        default:
+            break;
+    }
+
+    xhr.open("GET", url);
+    xhr.send();
+}
+
+function timeFilter(filter) {
+    let buttons = document.getElementsByClassName("arrayButton");
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove("selected");
+    }
+
+    buttons[filter].classList.add("selected");
+    rangeFilter = filter;
+    loadBookings();
+}
+
+function appendBooking(id, idUtente, idTavolo, dataora, numPersone, note) {
+    let cont = document.createElement("div");
+    cont.classList.add("reservation");
+    cont.id = id;
+    cont.onclick = function () {
+        openReservation(id);
+    };
+
+
+    let emailEl = document.createElement("p");
+    emailEl.classList.add("email");
+    emailEl.innerText = idUtente;
+
+    let tableEl = document.createElement("p");
+    tableEl.classList.add("table");
+    tableEl.innerText = idTavolo;
+
+    let peopleEl = document.createElement("p");
+    peopleEl.classList.add("people");
+    peopleEl.innerText = numPersone;
+
+    let dateEl = document.createElement("p");
+    dateEl.classList.add("date");
+    dateEl.innerText = dataora;
+
+    let noteEl = document.createElement("p");
+    noteEl.classList.add("note");
+    noteEl.innerText = note;
+
+    cont.appendChild(emailEl);
+    cont.appendChild(tableEl);
+    cont.appendChild(peopleEl);
+    cont.appendChild(dateEl);
+    cont.appendChild(noteEl);
+
+    document.getElementById("reservationList").appendChild(cont);
+}
+
+function showFilteredBookings(booking = loadedBookings) {
+    document.getElementById("reservationList").innerHTML = "";
+    if (document.getElementById("filterEmailCheckbox").checked && document.getElementById("filterEmail").value.trim() !== "") {
+        booking = booking.filter(e => e.idUtente === document.getElementById("filterEmail").value);
+    }
+
+    if (document.getElementById("filtertableCheckbox").checked && document.getElementById("filterTable").value.trim() !== "") {
+        if (Number(document.getElementById("filterTable").value)) {
+            booking = booking.filter(e => e.idTavolo === Number(document.getElementById("filterTable").value));
+        }
+    }
+
+    if (booking.length == 0) {
+        document.getElementById("reservationPlaceholder").classList.remove("hidden");
+        document.getElementById("reservationList").classList.add("hidden");
+        return;
+    }
+
+    document.getElementById("reservationPlaceholder").classList.add("hidden");
+    document.getElementById("reservationList").classList.remove("hidden");
+    booking.forEach(e => {
+        appendBooking(e.id, e.idUtente, e.idTavolo, e.dataora, e.numPersone, e.note);
+    });
+}
+
+
+function closeDashboard() {
+    document.getElementById("topBar").classList.remove("hidden");
+    document.getElementById("main").classList.remove("hidden");
+    document.getElementById("dashboard").classList.add("hidden");
+}
+
+function openPopup() {
+    document.getElementById("popUp").classList.remove("closed");
+    document.getElementById("overlay").classList.remove("hidden");
+}
+
+function closePopup() {
+    document.getElementById("popUp").classList.add("closed");
+    document.getElementById("overlay").classList.add("hidden");
+}
+
+function openReservation(id) {
+    let email = document.getElementById("popUpemail");
+    let table = document.getElementById("popUptable");
+    let people = document.getElementById("popUppeople");
+    let date = document.getElementById("popUpdate");
+    let note = document.getElementById("popUpnote");
+    let phone = document.getElementById("popUpphone");
+    let emailbtn = document.getElementById("emailButton");
+
+    let xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        try {
+            console.log(xhr.responseText);
+            const response = JSON.parse(xhr.responseText);
+            if (response.error === 0) {
+                email.innerText = "Email: " + response.prenotazione.email;
+                phone.innerText = "Phone: " + response.prenotazione.cellulare;
+                table.innerText = "Table: " + response.prenotazione.idTavolo;
+                date.innerText = "Date: " + response.prenotazione.dataora;
+                people.innerText = "People: " + response.prenotazione.nPersone;
+                note.innerText = "Additional Notes: " + response.prenotazione.note;
+                emailbtn.onclick = function () {
+                    window.location.href = "mailto:" + response.prenotazione.email;
+                };
+                openPopup();
+            } else {
+                console.log("Error loading reservation details error: " + response.error);
+            }
+        } catch (e) {
+            console.log("Parsing error " + e);
+        }
+    };
+
+    xhr.onerror = function () {
+        console.log("Communication error");
+    };
+
+    xhr.open("GET", "http://localhost:80/resturantSite/php/api.php?op=getAllInformazioni&id=" + id);
+    xhr.send();
 }
