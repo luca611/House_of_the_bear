@@ -334,50 +334,17 @@
                     # controllo se ci sono abbondanti posti per la prenotazione in quella fascia oraria
                     try{
                         # ottengo le prenotazioni per quel tavolo in quella data
-                        $q=$conn->prepare("SELECT * FROM prenotazioni WHERE idTavolo = ?");
-                        $q->bind_param("s", $tavolo);
+                        $oneHourBefore = $reservationDateTime->modify('-1 hour')->format('Y-m-d H:i:s');
+                        $reservationDateTime->modify('+2 hours');
+                        $oneHourAfter = $reservationDateTime->format('Y-m-d H:i:s');
+
+                        $q=$conn->prepare("SELECT * FROM prenotazioni WHERE idTavolo = ? AND dataora BETWEEN ? AND ?");
+                        $q->bind_param("sss", $tavolo, $oneHourBefore, $oneHourAfter);
                         $q->execute();
                         $res = $q->get_result();
 
-                        # controllo se c'è un ordinazione per quel tavolo meno di un'ora prima o entro un ora dopo
-                        $occupato = FALSE;
-                        $firstBefore = null;
-                        $firstAfter = null;
-
-                        while ($row = $res->fetch_assoc()) {
-                            $reservationDateTimeDB = new DateTime($row["dataora"]);
-
-                            #prendo la data piu' vicina prima di quella voluta e quella piu' vicina dopo
-                            if ($reservationDateTimeDB < $reservationDateTime) { 
-                                if ($firstBefore === null || $reservationDateTimeDB > $firstBefore) {
-                                    $firstBefore = $reservationDateTimeDB;
-                                }
-                            } else {
-                                if ($firstAfter === null || $reservationDateTimeDB < $firstAfter) {
-                                    $firstAfter = $reservationDateTimeDB;
-                                }
-                            }
-                        }
-
-                        # se è presente una prenotazione ed è entro un'ora prima il tavolo è considerato occupato
-                        if ($firstBefore !== null) {
-                            $diffBefore = $firstBefore->diff($reservationDateTime);
-                            $minutesBefore = $diffBefore->days * 24 * 60 + $diffBefore->h * 60 + $diffBefore->i;
-
-                            if ($minutesBefore < 60) {
-                                $occupato = TRUE;
-                            }
-                        }
-
-                        # se è presente una prenotazione ed è entro un'ora dopo il tavolo è considerato occupato
-                        if ($firstAfter !== null) {
-                            $diffAfter = $reservationDateTime->diff($firstAfter);
-                            $minutesAfter = $diffAfter->days * 24 * 60 + $diffAfter->h * 60 + $diffAfter->i;
-
-                            if ($minutesAfter < 60) {
-                                $occupato = TRUE;
-                            }
-                        }
+                        # se la query restituisce risultati, il tavolo è occupato
+                        $occupato = $res->num_rows > 0;
                         
                         # se il tavolo è occupato, non posso prenotare
                         if($occupato === TRUE){
@@ -463,19 +430,30 @@
                         break;
                     }
 
-                    # ricerca dei tavoli nel ristorante
-                    try{
-                        $q=$conn->prepare("select * from tavoli");
+                    if(!isset($_GET["dataora"])){
+                        $ret=["error"=>1, "message"=>"parametri mancanti"];
+                        break;
+                    }
+
+                    $dataora = $_GET["dataora"];
+
+                    $reservationDateTime = new DateTime($dataora);
+                    $oneHourBefore = $reservationDateTime->modify('-1 hour')->format('Y-m-d H:i:s');
+                    $reservationDateTime->modify('+2 hours');
+                    $oneHourAfter = $reservationDateTime->format('Y-m-d H:i:s');
+
+                    try {
+                        $q = $conn->prepare("SELECT * FROM tavoli WHERE id IN (SELECT id FROM tavoli EXCEPT SELECT DISTINCT idTavolo FROM prenotazioni WHERE dataora BETWEEN ? AND ?);");
+                        $q->bind_param("ss", $oneHourBefore, $oneHourAfter);
                         $q->execute();
                         $res = $q->get_result();
                         $tavoli = [];
-                        while($row = $res->fetch_assoc()){
+                        while ($row = $res->fetch_assoc()) {
                             $tavoli[] = $row;
                         }
-                        $ret=["error"=>0, "tavoli"=>$tavoli];
-                    }
-                    catch(Exception $ex){
-                        $ret=["error"=>1 , "message"=>"errore interno"];
+                        $ret = ["error" => 0, "tavoli" => $tavoli];
+                    } catch (Exception $ex) {
+                        $ret = ["error" => 1, "message" => "errore interno"];
                     }
                 }break;
 

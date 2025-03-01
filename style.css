@@ -1203,6 +1203,12 @@ div.reservation {
     width: 90%;
     color: var(--primary-text-color-light);
     font-family: var(--subtitle-font);
+    transition: filter 0.3s;
+}
+
+div.reservation:hover {
+    cursor: pointer;
+    filter: brightness(0.9);
 }
 
 div.reservation p {
@@ -1294,7 +1300,7 @@ p.people {
 }
 
 div.popUp {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
@@ -1314,6 +1320,31 @@ div.popUp {
     justify-content: space-between;
 }
 
+#popUpemail::before {
+    content: "Email : ";
+    color: var(--primary-text-color-light);
+}
+
+#popUptable::before {
+    content: "Table : ";
+    color: var(--primary-text-color-light);
+}
+
+#popUpdate::before {
+    content: "Date : ";
+    color: var(--primary-text-color-light);
+}
+
+#popUpnote::before {
+    content: "Note : ";
+    color: var(--primary-text-color-light);
+}
+
+#popUppeople::before {
+    content: "People : ";
+    color: var(--primary-text-color-light);
+}
+
 div.popUp.closed {
     bottom: -70vh;
 }
@@ -1327,6 +1358,44 @@ div.overlay {
     background: rgba(0, 0, 0, 0.274);
     z-index: 10;
 }
+
+div.popUpButtons {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
+}
+
+button.popUpButton.danger {
+    background-color: var(--danger-color);
+}
+
+button.popUpButton.large {
+    width: 100%;
+}
+
+button.popUpButton {
+    background-color: var(--bg-color-dark);
+    border: none;
+    padding: 0.5rem;
+    color: var(--primary-text-color-light);
+    font-family: var(--button-font);
+    border-radius: var(--button-border-radius);
+    cursor: pointer;
+    display: flex;
+    transition: all 0.3s;
+    align-items: center;
+    justify-content: center;
+}
+
+button.popUpButton:hover {
+    filter: brightness(0.8);
+}
+
+p.autoSpacing {
+    margin-top: auto;
+}
+
 
 @media screen and (max-width : 70rem) {
     div.filters {
@@ -1643,8 +1712,18 @@ button.formConfirmButton {
     transition: all 0.3s;
 }
 
+button.formConfirmButton:disabled {
+    filter: grayscale(1);
+    cursor: not-allowed;
+}
+
 button.formConfirmButton:hover {
     filter: brightness(0.8);
+}
+
+p.tableDescription {
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 div.registrationForm {
@@ -1656,6 +1735,94 @@ div.registrationForm {
     border-radius: var(--div-border-radius);
     padding: 3rem;
     margin: auto;
+}
+
+div.reservationForm {
+    width: 70vw;
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+div.removeAbsolute {
+    position: relative !important;
+    bottom: 0;
+}
+
+div.innerReservation {
+    padding: 2rem;
+    height: 100%;
+    width: 100%;
+    background-color: var(--bg-color-dark);
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    overflow: auto;
+}
+
+p.marginAuto {
+    margin-top: auto !important;
+}
+
+div.width-100 {
+    width: 100%;
+}
+
+div.tableSection {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    width: 100%;
+    height: 10rem;
+}
+
+div.tableInfos {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    width: 100%;
+}
+
+img.tableImg {
+    width: 10rem;
+    height: 10rem;
+    object-fit: cover;
+    border-radius: var(--div-border-radius);
+}
+
+div.tableInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    color: var(--secondary-text-color-light);
+    font-family: var(--subtitle-font);
+    justify-content: space-between;
+    height: 100%;
+    max-width: 60%;
+    word-wrap: break-word;
+    font-size: 1.3rem;
+}
+
+button.tableScroll {
+    background-color: var(--bg-color-light);
+    border-radius: 100rem;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    height: 3rem;
+    width: 3rem;
+    flex-shrink: 0;
+    margin: auto;
+}
+
+button.tableScroll:hover {
+    filter: brightness(0.8);
 }
 
 /*------------------------------------------*/
@@ -1725,6 +1892,12 @@ div.registrationForm {
 }
 
 @media screen and (max-width: 45rem) {
+
+    div.reservationForm {
+        width: 100vw;
+        height: 80vh;
+    }
+
 
     div.registrationForm {
         width: 90vw;

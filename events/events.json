@@ -1,12 +1,5 @@
 {
-    "0":{
-            "name": "Sweet Holiday Treats",
-        "description": "Celebrate the joy of Christmas with us! Join our festive event and enjoy a free dessert on the house. From delectable cakes to holiday-inspired pastries, we’re spreading the cheer one sweet treat at a time.",
-        "bg_url": "resources/events/ev1.webp",
-        "ending_date": "2025-2-25"
-    },
-
-    "1":{
+    "0": {
         "name": "Spring Cooking Class",
         "description": "Learn how to cook fresh and vibrant dishes with our spring cooking class. Our chefs will guide you through the process of creating delicious meals using seasonal ingredients. Sign up now and get a taste of spring!",
         "bg_url": "resources/events/ev2.webp",

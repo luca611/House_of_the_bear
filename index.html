@@ -245,66 +245,74 @@
     <!-- booking page -->
     <div class="book hidden" id="bookPage">
         <!-- Page if logged -->
-        <div class="reservationSubsection hidden" id="booking">
-            <!-- booking form -->
-            <div class="bookSection">
-                <div class="formContainer">
-                    <div class="row">
-                        <div class="halfRow">
-                            <p class="fieldLabel">Name</p>
-                            <input type="text" class="input" id="name">
-                        </div>
-                        <div class="halfRow">
-                            <p class="fieldLabel">Last name</p>
-                            <input type="text" class="input" id="surname">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="fullRow">
-                            <p class="fieldLabel">How many people?</p>
-                            <input type="number" class="input" id="people" min="1" max="12">
-                        </div>
-                    </div>
+        <div class="reservationSubsection" id="booking">
+            <button class="closeButton" onclick="closeBooking()">X</button>
+
+        <!-- allergenes infos -->
+        <button class="infoButton">?</button>
+        <div class="menuInfos">
+            <div class="textWithIcon">
+                <img src="resources/icons/location.svg" alt="time" class="icon">
+                <p class="text">at: Strada Provinciale 73 bis</p>
+            </div>
+            <div class="textWithIcon">
+                <img src="resources/icons/time.svg" alt="time" class="icon">
+                <p class="text">open: 11:30 - 15:30</p>
+            </div>
+        </div>
+            <div class="menuTitle width-100" id="bookingTitle">
+                <h1 class="menuTitleText" id="menuTitle">Booking</h1>
+            </div>
+            <div class="reservationForm hidden" id="reservationForm">
+                <div class="topDecoration removeAbsolute"></div>
+                <div class="innerReservation">
                     <div class="row">
                         <div class="halfRow">
                             <p class="fieldLabel">Date</p>
-                            <input type="date" class="input" id="date">
+                            <input type="date" class="input" id="reservationDate" onchange="validateDate()">
                         </div>
                         <div class="halfRow">
-                            <p class="fieldLabel">Time</p>
-                            <input type="time" class="input" id="time">
+                            <p class="fieldLabel"> Time</p>
+                            <input type="time" class="input" id="reservationTime" min="11:20" max="14:30" onchange="validateDate()">
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="fullRow">
-                            <p class="fieldLabel">Phone number</p>
-                            <input class="input" type="tel" id="phoneNumber"></input>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="fullRow">
-                            <p class="error" id="error"></p>
-                            <div class="row">
-                                <div class="halfRow">
-                                    <button class="submitButton close" onclick="closeBooking()">Cancel</button>
-                                </div>
-                                <div class="halfRow">
-                                    <button class="submitButton" onclick="submitBooking()">Submit</button>
+                    <p class="fieldLabel margin-top-1">Choose your table</p>
+                    <div class="tableSection">
+                        <div class="tableInfos">
+                            <img alt="tableImg" src="resources/imgs/notFoundIcon.svg" class="tableImg" id="tableImg">
+                            <div class="tableInfo">
+                                <p class="tableDescription" id="tableDescription">It seems like no tables are available at the selected time.</p>
+                                <div class="textWithIcon">
+                                    <img src="resources/icons/people.svg" alt="people" class="icon">
+                                    <p class="text" id="tablePeople">0</p>
                                 </div>
                             </div>
                         </div>
+                        <button class="tableScroll hidden" id="tableScroll" onclick="showNextTable()">
+                            <img src="resources/icons/arrow.svg" alt="arrow" class="icon">
+                        </button>
+                </div>
+                <div class="row">
+                    <div class="fullRow">
+                        <p class="fieldLabel">People</p>
+                        <input type="number" class="input" id="reservationPeopleInput" min="1" max="20" onkeydown="checkPosti()">
                     </div>
                 </div>
+                <div class="row">
+                    <div class="fullRow">
+                        <p class="fieldLabel">Notes</p>
+                        <input class="input" id="reservationNotes" placeholder="Notes"></input>
+                    </div>
+                </div>
+                <p class="error marginAuto" id="reservationError"></p>
+                <button class="formConfirmButton" onclick="book()" id="bookButton">Book</button>
             </div>
-            <!-- section where reviews are generated based on the json -->
-            <div class="bookSection reviews" id="reviewScroll">
-            </div>
-        </div>
 
+        </div>
+        </div>
         <!-- Page if not logged -->
         <div class="reservationSubsection" id="login">
             <div class="registrationForm">
-                
                 
                 <!-- login form -->
                 <div class="innerform" id="loginForm">
@@ -494,10 +502,13 @@
                 <p class="text" id="popUpnote">text</p>
             </div>
         </div>
-        <div class="popUpButtons">
-            <button class="popUpButton" onclick="deleteBooking()">Delete</button>
-            <button class="popUpButton" onclick="closePopUp()">Close</button>
-            <button class="popUpButton" id="emailButton"><img src="resources/icons/mail.svg" class="icon"></button>
+        <div>
+            <p class="error" id="popUpError">test</p>
+            <div class="popUpButtons">
+                <button class="popUpButton" id="emailButton"><img src="resources/icons/mail.svg" class="icon"></button>
+                <button class="popUpButton large" id="closeButton" onclick="closePopup()">Close</button>
+                <button class="popUpButton danger" id="deleteButton">Delete</button>
+            </div>
         </div>
     </div>
 </body>
