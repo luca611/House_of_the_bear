@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="resources/icons/favicon.ico" type="image/x-icon">
 </head>
-<body onload="showTodaysSpecial();loadAd()">
+<body onload="showTodaysSpecial();loadAd();checkLogged();">
 
     <!-- top bar -->
     <div class="topBar" id="topBar">
@@ -25,12 +25,12 @@
             <a href="#findUs" class="navButton">find us</a>
             <button class="navButton highlighted" onclick="showbooking(); loadReviews()">book</button>
         
-            <input type="checkbox" id="toggleMenu" class="toggleMenu mobileNavbarButton" hidden>
+            <input type="checkbox" id="toggleMenu" class="toggleMenu mobileNavbarButton hidden">
         
             <label for="toggleMenu" class="navButton mobile highlighted mobileNavbarButton">
                 ☰
             </label>
-        
+            
             <!-- mobile buttons -->
             <div class="mobileNav">
                 <a class="mobileNavButton" href="#events">events</a>
@@ -41,7 +41,9 @@
                 <hr class="mobileNavSeparator">
                 <button class="mobileNavButton highlighted" onclick="showbooking(); loadReviews()">book</button>
             </div>
+            <button class="logoutButton highlighted hidden" onclick="logout()" id="logoutButton"><img class="icon" src="resources/icons/logout.svg"></button>
         </div>
+        
         
     </div>
 
@@ -312,6 +314,7 @@
         </div>
         <!-- Page if not logged -->
         <div class="reservationSubsection" id="login">
+            <button class="closeButton" onclick="closeBooking()">X</button>
             <div class="registrationForm">
                 
                 <!-- login form -->

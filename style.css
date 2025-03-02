@@ -195,6 +195,23 @@ div.separation.light {
     transition: all 0.3s;
 }
 
+.logoutButton {
+    text-decoration: none;
+    border: none;
+    font-size: 1.2rem;
+    padding: 0.5rem 0.7rem;
+    background: transparent;
+    font-family: var(--button-font);
+    color: var(--primary-text-color-light);
+    border-radius: var(--button-border-radius);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.logoutButton:hover {
+    background-color: var(--danger-color) !important;
+}
+
 .navButton:hover {
     color: var(--secondary-text-color-light);
     background: var(--trasparent-grey);
@@ -1486,6 +1503,13 @@ div.innerform {
     height: 100%;
 }
 
+div.links {
+    height: 3.8rem;
+    padding: 0.3rem;
+    display: flex;
+    gap: 0.2rem;
+}
+
 a.link {
     margin-top: auto;
     margin-bottom: 0.3rem;
@@ -1724,6 +1748,7 @@ button.formConfirmButton:hover {
 p.tableDescription {
     overflow: hidden;
     text-overflow: ellipsis;
+    margin: 0.1rem;
 }
 
 div.registrationForm {

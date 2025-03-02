@@ -323,6 +323,44 @@ function toggleForm() {
     document.getElementById("registerForm").classList.toggle("hidden");
 }
 
+function logout() {
+    let xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        let response = JSON.parse(xhr.responseText);
+        if (response.error == "0") {
+            location.reload();
+        } else {
+            console.log("Errore di logout");
+        }
+    }
+
+    xhr.onerror = function () {
+        console.log("Errore di comunicazione");
+    }
+
+    xhr.open("GET", "./php/api.php?op=logout");
+    xhr.send();
+}
+
+function checkLogged() {
+    let xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        let response = JSON.parse(xhr.responseText);
+        if (response.error == "0") {
+            document.getElementById("logoutButton").classList.remove("hidden");
+        } else {
+            document.getElementById("logoutButton").classList.remove("add");
+        }
+    }
+
+    xhr.onerror = function () {
+        console.log("Errore di comunicazione");
+    }
+
+    xhr.open("GET", "./php/api.php?op=isLogged");
+    xhr.send();
+}
+
 /*
     funzione per verificare che sia loggato
 */
@@ -649,6 +687,7 @@ function login() {
         let response = JSON.parse(xhr.responseText);
         if (response.error == "0") {
             redirectUser();
+            checkLogged();
         } else {
             document.getElementById("loginError").innerText = "Email o password errati";
         }
@@ -687,6 +726,7 @@ function register() {
         let response = JSON.parse(xhr.responseText);
         if (response.error == "0") {
             redirectUser();
+            checkLogged();
         } else {
             document.getElementById("registerError").innerText = response.message;
         }
@@ -981,7 +1021,7 @@ function validateDate() {
     let time = document.getElementById("reservationTime").value;
 
     let error = 0;
-    if (date === "" || typeof date === "undefined" || new Date(date) < new Date()) {
+    if (date === "" || typeof date === "undefined" || new Date(date).setHours(0, 0, 0, 0) < new Date().setHours(0, 0, 0, 0)) {
         document.getElementById("reservationDate").classList.add("error");
         error++;
     } else {
